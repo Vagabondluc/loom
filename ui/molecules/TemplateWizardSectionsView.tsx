@@ -39,7 +39,7 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
                     aria-label={`Select ${section} section`}
                   />
 
-                  <div className="flex-1" onClick={(e) => { e.preventDefault(); isSelected && onToggleExpand(section); }}>
+                  <div className="flex-1" onClick={(e) => { e.stopPropagation(); isSelected && onToggleExpand(section); }}>
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-sm">{section}</span>
                       {instructorTip && <Badge variant="ghost" size="xs" className="font-normal opacity-70 hidden sm:inline-flex">Purpose</Badge>}
