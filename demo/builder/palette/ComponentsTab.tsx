@@ -6,6 +6,7 @@ import { componentToTemplate } from './utils';
 import { usePaletteInteractions } from './usePaletteInteractions';
 import { PlayCircle } from 'lucide-react';
 import { clsx } from 'clsx';
+import { PanelHeaderView } from '../../../ui';
 
 export const ComponentsTab: React.FC = () => {
   const { handleMouseDown, handleKeyDown } = usePaletteInteractions();
@@ -16,9 +17,7 @@ export const ComponentsTab: React.FC = () => {
     <div className="pb-8">
        {recentlyUsed.length > 0 && (
         <div className="pb-4 border-b border-base-300">
-            <h3 className="text-xs font-bold uppercase tracking-wider opacity-60 bg-base-300/50 py-3 px-4 z-10 border-b border-t border-base-300 shadow-sm">
-                Recently Used
-            </h3>
+          <PanelHeaderView title={<span className="text-xs font-bold uppercase tracking-wider opacity-60">Recently Used</span>} className="p-0 bg-base-300/50 py-3 px-4 z-10 border-b border-t border-base-300 shadow-sm" />
             <div className="p-4 overflow-x-auto scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-transparent">
                 <div className="flex space-x-3">
                     {recentlyUsed.map(componentId => {
@@ -51,9 +50,7 @@ export const ComponentsTab: React.FC = () => {
         </div>
       )}
 
-      <h3 className="text-xs font-bold uppercase tracking-wider opacity-60 bg-base-300/50 py-3 px-4 z-10 border-b border-t border-base-300 shadow-sm">
-        Components
-      </h3>
+      <PanelHeaderView title={<span className="text-xs font-bold uppercase tracking-wider opacity-60">Components</span>} className="p-0 bg-base-300/50 py-3 px-4 z-10 border-b border-t border-base-300 shadow-sm" />
       {categories.map(cat => (
           <div key={cat}>
             <h4 className="text-xs font-bold uppercase tracking-wider opacity-50 pt-4 pb-2 px-4">

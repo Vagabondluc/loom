@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { Modal, Button, Badge } from '../../ui';
+import { Modal, Button, Badge, PanelHeaderView } from '../../ui';
 import { useBuilderStore } from './store';
 import { validateImport } from './serialization';
 import { EXPORT_TARGETS, ExportFidelity } from './export/manifest';
@@ -112,24 +112,24 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onClose }) => {
         <div className="flex-1 flex flex-col bg-base-100">
             {mode === 'export' ? (
                 <>
-                    <div className="p-4 border-b border-base-300 flex justify-between items-start bg-base-100">
-                        <div>
-                            <div className="flex items-center gap-2 mb-1">
-                                <h2 className="text-lg font-bold">{selectedTarget.label}</h2>
-                                <FidelityBadge fidelity={selectedTarget.fidelity} />
-                            </div>
-                            <p className="text-sm opacity-70">{selectedTarget.description}</p>
-                        </div>
-                        <Button 
-                            size="sm" 
-                            variant="primary" 
-                            onClick={handleCopy}
-                            className="gap-2"
-                        >
-                            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            {copied ? 'Copied' : 'Copy Code'}
-                        </Button>
-                    </div>
+                                        <PanelHeaderView
+                                            title={(
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <h2 className="text-lg font-bold">{selectedTarget.label}</h2>
+                                                        <FidelityBadge fidelity={selectedTarget.fidelity} />
+                                                    </div>
+                                                    <p className="text-sm opacity-70">{selectedTarget.description}</p>
+                                                </div>
+                                            )}
+                                            actions={(
+                                                <Button size="sm" variant="primary" onClick={handleCopy} className="gap-2">
+                                                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                                    {copied ? 'Copied' : 'Copy Code'}
+                                                </Button>
+                                            )}
+                                            className="p-4 border-b border-base-300 flex justify-between items-start bg-base-100"
+                                        />
 
                     {validationIssues.length > 0 && (
                         <div className="bg-base-200/50 border-b border-base-300 p-3 space-y-1">

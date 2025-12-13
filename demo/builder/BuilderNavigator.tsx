@@ -4,6 +4,7 @@ import { useBuilderStore } from './store';
 import { COMPONENT_REGISTRY } from './registries';
 import { BuilderNode } from '../../types';
 import { ListTree, Eye, EyeOff } from 'lucide-react';
+import { PanelHeaderView } from '../../ui';
 import { clsx } from 'clsx';
 
 const NavigatorItem: React.FC<{ node: BuilderNode; level: number }> = ({ node, level }) => {
@@ -66,11 +67,7 @@ export const BuilderNavigator: React.FC = () => {
 
   return (
     <div className="w-60 bg-base-200 h-full flex flex-col border-r border-base-300">
-      <div className="p-4 border-b border-base-300 bg-base-300/50 flex-shrink-0">
-        <h2 className="font-bold flex items-center gap-2 text-sm">
-          <ListTree className="w-4 h-4" /> Navigator
-        </h2>
-      </div>
+      <PanelHeaderView title={<span className="text-sm font-bold flex items-center gap-2"><ListTree className="w-4 h-4" /> Navigator</span>} className="p-4 border-b border-base-300 bg-base-300/50 flex-shrink-0" />
       <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
         <NavigatorItem node={rootNode} level={0} />
       </div>

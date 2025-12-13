@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { TEMPLATE_REGISTRY } from '../templates';
 import { usePaletteInteractions } from './usePaletteInteractions';
 import { LayoutTemplate, Sparkles, Server } from 'lucide-react';
-import { Badge, Button, TemplateCardView } from '../../../ui';
+import { Badge, Button, TemplateCardView, PanelHeaderView } from '../../../ui';
 import { ProceduralWizardPanel } from './ProceduralWizardPanel';
 
 interface TemplatesTabProps {
@@ -16,22 +16,21 @@ export const TemplatesTab: React.FC<TemplatesTabProps> = ({ onOpenWizard }) => {
 
   return (
     <div className="flex flex-col h-full border-b border-base-300">
-      <div className="flex items-center justify-between bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm flex-shrink-0">
-        <h3 className="text-xs font-bold uppercase tracking-wider opacity-60">
-          Templates
-        </h3>
-        
-        {/* Toggle Switch */}
-        <label className="label cursor-pointer gap-2 py-0">
-            <span className="label-text text-[10px] uppercase font-bold opacity-60">Wizard</span> 
-            <input 
-                type="checkbox" 
-                className="toggle toggle-xs toggle-accent" 
-                checked={isWizardMode}
-                onChange={(e) => setIsWizardMode(e.target.checked)}
+      <PanelHeaderView
+        title={<span className="text-xs font-bold uppercase tracking-wider opacity-60">Templates</span>}
+        actions={(
+          <label className="label cursor-pointer gap-2 py-0">
+            <span className="label-text text-[10px] uppercase font-bold opacity-60">Wizard</span>
+            <input
+              type="checkbox"
+              className="toggle toggle-xs toggle-accent"
+              checked={isWizardMode}
+              onChange={(e) => setIsWizardMode(e.target.checked)}
             />
-        </label>
-      </div>
+          </label>
+        )}
+        className="p-0 bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm flex-shrink-0"
+      />
 
       <div className="flex-1 overflow-hidden">
         {isWizardMode ? (

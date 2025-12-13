@@ -12,27 +12,25 @@ import { SchemaEditor } from './properties/SchemaEditor';
 import { RuntimeVariableEditor } from './properties/RuntimeVariableEditor';
 import { PageSettingsEditor } from './properties/PageSettingsEditor';
 import { DocumentEditor } from './properties/DocumentEditor';
-import { Alert } from '../../ui';
+import { Alert, PanelHeaderView } from '../../ui';
 
 export const BuilderProperties: React.FC = () => {
   const selectedNodeId = useBuilderStore(s => s.selectedNodeId);
   const nodes = useBuilderStore(s => s.nodes);
   const deleteNode = useBuilderStore(s => s.deleteNode);
 
-  if (!selectedNodeId) {
-    return (
+    if (!selectedNodeId) {
+     return (
       <div className="w-72 bg-base-200 border-l border-base-300 flex flex-col h-full">
-         <div className="p-4 border-b border-base-300 bg-base-300/50">
-            <h2 className="font-bold text-sm flex items-center gap-2"><Settings2 className="w-4 h-4"/> Settings</h2>
-         </div>
-         <div className="flex-1 overflow-y-auto p-4 space-y-6">
-            <PageSettingsEditor />
-            <div className="divider"></div>
-            <RuntimeVariableEditor />
-         </div>
+        <PanelHeaderView title="Settings" icon={<Settings2 className="w-4 h-4" />} />
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          <PageSettingsEditor />
+          <div className="divider"></div>
+          <RuntimeVariableEditor />
+        </div>
       </div>
-    );
-  }
+     );
+    }
 
   const node = nodes[selectedNodeId];
   if (!node) return null;
@@ -68,7 +66,7 @@ export const BuilderProperties: React.FC = () => {
             </Alert>
         )}
         
-        {/* Root Node Special Panel: Runtime Variables */}
+        {/* Root Node: Runtime Variables */}
         {isRoot && <PageSettingsEditor />}
         {isRoot && <div className="divider m-0"></div>}
         {isRoot && <RuntimeVariableEditor />}

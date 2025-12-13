@@ -4,7 +4,7 @@ import { usePaletteInteractions } from './usePaletteInteractions';
 import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
-import { Badge, EmptyStateView } from '../../../ui';
+import { Badge, EmptyStateView, PanelHeaderView } from '../../../ui';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
 interface ParsedBlock {
@@ -104,9 +104,10 @@ export const MarkdownTab: React.FC = () => {
 
   return (
     <div className="border-b border-base-300 flex flex-col h-full">
-      <h3 className="text-xs font-bold uppercase tracking-wider opacity-60 bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm">
-        From Markdown
-      </h3>
+      <PanelHeaderView
+        title={<span className="text-xs font-bold uppercase tracking-wider opacity-60">From Markdown</span>}
+        className="p-0 bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm"
+      />
       <div className="p-4 space-y-4 flex-1 flex flex-col min-h-0">
         <div className="form-control flex-shrink-0">
           <textarea 
