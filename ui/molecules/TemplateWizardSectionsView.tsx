@@ -1,8 +1,9 @@
 import React from 'react';
-import { ChevronDown, ChevronUp, Layout } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Badge } from '../atoms/Badge';
 import TemplateWizardEmptyStateView from './TemplateWizardEmptyStateView';
+import TemplateWizardSectionConfigView from './TemplateWizardSectionConfigView';
 
 type SectionDef = { id: string; desc?: string };
 
@@ -15,9 +16,10 @@ type Props = {
   onToggleExpand: (section: string) => void;
   sectionConfig: Record<string, any>;
   sectionInstructions?: Record<string, string>;
+  onSectionConfigChange: (section: string, key: string, value: any) => void;
 };
 
-export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggestions, selectedSections, expandedSection, onToggleSelect, onToggleExpand, sectionConfig, sectionInstructions }) => {
+export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggestions, selectedSections, expandedSection, onToggleSelect, onToggleExpand, sectionConfig, sectionInstructions, onSectionConfigChange }) => {
   return (
     <div className="flex flex-col gap-2">
       {suggestions[pageType]?.length > 0 ? (
@@ -56,12 +58,11 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
               </div>
 
               {isSelected && isExpanded && (
-                <div className="bg-base-200/50 p-4 border-t border-base-200 rounded-b-xl animate-in slide-in-from-top-1">
-                  <div className="text-[10px] font-bold uppercase opacity-40 mb-3 tracking-wider flex items-center gap-2">
-                    <Layout className="w-3 h-3" /> Section Configuration
-                  </div>
-                  <div className="text-xs opacity-50 italic">No specific overrides available for this section.</div>
-                </div>
+                <TemplateWizardSectionConfigView 
+                  section={section} 
+                  config={config} 
+                  onChange={(key, value) => onSectionConfigChange(section, key, value)} 
+                />
               )}
             </div>
           );

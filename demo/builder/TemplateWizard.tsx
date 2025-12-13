@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useBuilderStore } from './store';
 import { useToastStore } from '../../stores/toastStore';
@@ -18,7 +17,6 @@ import TemplateWizardStepHeaderView from '../../ui/molecules/TemplateWizardStepH
 import { clsx } from 'clsx';
 import TemplateWizardContextView from '../../ui/molecules/TemplateWizardContextView';
 import TemplateWizardErrorAlertView from '../../ui/molecules/TemplateWizardErrorAlertView';
-import TemplateWizardSectionConfigView from '../../ui/molecules/TemplateWizardSectionConfigView';
 
 interface TemplateWizardProps {
   open: boolean;
@@ -289,11 +287,8 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
                     sectionConfig={sectionConfig}
                     sectionInstructions={SECTION_INSTRUCTION}
+                    onSectionConfigChange={updateSectionConfig}
                 />
-                {expandedSection && selectedSections[expandedSection] && (
-                    <TemplateWizardSectionConfigView section={expandedSection} config={sectionConfig[expandedSection]} onChange={(key, val) => updateSectionConfig(expandedSection, key, val)} />
-                )}
-                </div>
             </section>
 
             {/* 5. Context */}
