@@ -1,23 +1,7 @@
 
-import fs from "fs"
-import path from "path"
-
-const DOCS = "docs"
-
-function walk(dir) {
-  const out = []
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name)
-    if (entry.isDirectory()) out.push(...walk(p))
-    else out.push(p)
-  }
-  return out
-}
-
-const specFiles = walk(DOCS).filter(p => path.basename(p).startsWith("spec-") && p.endsWith(".md"))
-const tddFiles = new Set(walk(DOCS).filter(p => path.basename(p).startsWith("tdd-") && p.endsWith(".md")).map(p => path.basename(p)))
-
-let fail = false
+// Node-based check script has moved to docs/tools
+// Please use docs/tools/check-contract.node.mjs for contract checks.
+// This file is a placeholder to avoid Node-based tools in scripts/.
 
 for (const file of specFiles) {
   const base = path.basename(file)

@@ -66,7 +66,29 @@ CI MUST fail if:
 - a spec with REQs does not declare a TDD partner
 - a spec references a missing TDD file
 
-Reference implementation: `scripts/check-contract.js`
+Reference implementation: `scripts/check-contract.sh` and optional external runner `docs/tools/check-contract.node.mjs`
+
+### Node-Based Governance Tools (Transitional)
+
+Node-based audit tools may exist under `docs/tools` as a temporary compatibility measure.
+They MUST:
+- Never be executed in the GAIS browser runtime
+- Never be imported by runtime code
+- Be executable only by CI or external tooling
+
+The canonical enforcement model is an external governance runner (separate Git/Gov repo). 
+The presence of Node-based tools in this repo is transitional and does not change Loom's GAIS-first policy.
+
+### Demo Runtime Shims (Transitional)
+
+Files under `demo/**/registry/runtime/**` are transitional shims only.
+
+They MUST:
+- Contain no runtime logic (no `class`, `function`, or other implementation)
+- Only re-export symbols from `services/registry/runtime` (e.g., `export { prelineAdapter } from '../../../../services/registry/runtime/adapters/preline'`)
+- Not introduce new adapters, types, or lifecycle code
+
+CI will enforce this via `scripts/check-shim-purity.sh` which validates the shim-only rule.
 
 ---
 

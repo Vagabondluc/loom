@@ -18,3 +18,29 @@ jobs:
               exit 1;
           fi
           echo "✅ No Node artifacts found."
+
+      - name: Ensure Node APIs only in docs/tools
+        run: |
+          set -e
+          FAIL=0
+          for f in $(git ls-files "**/*.*" 2>/dev/null); do
+            # skip allowed folder
+            if [[ "$f" == docs/tools/* ]]; then
+              continue
+            fi
+            if grep -nE "require\(|from\s+['\"](fs|path|child_process|os|process|Buffer)" "$f" >/dev/null 2>&1; then
+              echo "Found Node API usage outside docs/tools: $f"
+              grep -nE "require\(|from\s+['\"](fs|path|child_process|os|process|Buffer)" "$f" || true
+              FAIL=1
+            fi
+            # also prevent `.node.` files outside docs/tools
+            if [[ "$f" == *".node."* ]] && [[ "$f" != docs/tools/* ]]; then
+              echo "Found .node. file outside docs/tools: $f"
+              FAIL=1
+            fi
+          done
+          if [ "$FAIL" -eq 1 ]; then
+            echo "❌ Node APIs found outside docs/tools. Move Node-only audit tools to docs/tools or remove Node usage.";
+            exit 1
+          fi
+          echo "✅ Node APIs confined to docs/tools or absent."

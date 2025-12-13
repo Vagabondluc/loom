@@ -7,6 +7,12 @@
 2.  **Atomicity:** Every task must be atomic, actionable, and represent a single, verifiable change.
 3.  **Decomposition:** Large requests will be broken down into multiple tasks, organized into phases. This `todo.md` is often refilled from a specification document in `/docs/`.
 
+> ⚠️ Scope Note
+>
+> This `todo.md` tracks **architectural and feature execution only**. Governance, CI enforcement, and audit tooling live in `/docs` and CI workflows and are **not** tracked as executable tasks here unless they directly unblock a phase step.
+
+**Invariant:** Execution plans must not become policy documents.
+
 
 
 # Project Status
@@ -94,11 +100,12 @@ These epics represent long-term goals that will build upon the completed phases 
 > **Invariant:** No GAIS workarounds in this phase.
 
 ### GAIS Protections
+> Note: This section captures governance constraints and protections. These are ambient constraints (META) and not execution tasks unless they directly unblock a phase.
 
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
 - [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
 - [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
@@ -187,7 +194,7 @@ If something breaks: fix structure, **not** types.
 
 ---
 
-### 8. Add CI Rules (Clean Version Only)
+### 8. Add CI Rules (Clean Version Only) [META]
 
 Now that the structure is clean:
 - [ ] Add CI rule: forbid imports from `demo/**` outside `demo/**`
@@ -272,7 +279,7 @@ After this phase is merged:
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
 - [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
 - [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
@@ -465,7 +472,7 @@ This is a VS Code–specific migration checklist, written as an execution playbo
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
 - [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
 - [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)

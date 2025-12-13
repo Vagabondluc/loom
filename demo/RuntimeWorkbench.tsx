@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Card, Button } from '../ui';
 import { COMPONENT_REGISTRY } from './builder/registries';
-import { runtimeAdapterRegistry } from './builder/registry/runtime/RuntimeAdapterRegistry';
+import { runtimeAdapterRegistry } from './builder/registry/runtime/registry';
 import { RuntimeVariableEditor } from './builder/properties/RuntimeVariableEditor';
 import { useRuntimeStore } from '../stores/runtimeStore';
 import { componentToTemplate } from './builder/palette/utils';

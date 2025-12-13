@@ -8,26 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Find runtime imports from demo
+      - name: Run contract checks
         run: |
-          set -e
-          echo "Searching for imports from demo in runtime folders..."
-          # Files allowed to import from demo: demo/** and demo index files. Exclude demo itself.
-          IGNORED='demo/'
-          FAIL=0
-
-          # Search runtime folders for literal 'from .*demo' pattern
-          for f in $(git ls-files "services/**" "stores/**" "utils/**" "ui/**" "config/**" "types.ts" "App.tsx"); do
-            if grep -nE "from \(['\"](\.{1,2}/)?demo/|from \(['\"]demo/" "$f" >/dev/null; then
-              echo "Found demo import in $f";
-              grep -nE "from \(['\"](\.{1,2}/)?demo/|from \(['\"]demo/" "$f" || true;
-              FAIL=1
-            fi
-          done
-
-          if [ "$FAIL" -eq 1 ]; then
-            echo "❌ Found imports from demo in runtime files. Please remove them or move runtime logic out of demo.";
-            exit 1
+          if [ -f "docs/tools/check-contract.node.mjs" ]; then
+            node docs/tools/check-contract.node.mjs
+          else
+            bash ./scripts/check-contract.sh
           fi
-
-          echo "✅ No imports from demo found in runtime folders."
