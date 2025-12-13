@@ -30,20 +30,23 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
           return (
             <div key={section} className={clsx("card card-bordered card-compact transition-all", isSelected ? "bg-base-100 shadow-sm border-base-300" : "bg-transparent border-transparent opacity-50")}>
               <div className="card-body flex-row items-center gap-4 py-3">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
-                  checked={isSelected}
-                  onChange={(e) => onToggleSelect(section, e.target.checked)}
-                />
+                <label className="flex items-center gap-4 flex-1 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-sm checkbox-primary"
+                    checked={isSelected}
+                    onChange={(e) => onToggleSelect(section, e.target.checked)}
+                    aria-label={`Select ${section} section`}
+                  />
 
-                  <div className="flex-1 cursor-pointer" onClick={() => isSelected && onToggleExpand(section)}>
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-sm">{section}</span>
-                    {instructorTip && <Badge variant="ghost" size="xs" className="font-normal opacity-70 hidden sm:inline-flex">Purpose</Badge>}
+                  <div className="flex-1" onClick={(e) => { e.preventDefault(); isSelected && onToggleExpand(section); }}>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm">{section}</span>
+                      {instructorTip && <Badge variant="ghost" size="xs" className="font-normal opacity-70 hidden sm:inline-flex">Purpose</Badge>}
+                    </div>
+                    {instructorTip && <p className="text-xs opacity-60 mt-0.5">{instructorTip}</p>}
                   </div>
-                  {instructorTip && <p className="text-xs opacity-60 mt-0.5">{instructorTip}</p>}
-                </div>
+                </label>
 
                 {isSelected && (
                   <button
