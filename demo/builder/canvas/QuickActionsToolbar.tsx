@@ -3,7 +3,7 @@ import React from 'react';
 import { useBuilderStore } from '../store';
 import { BuilderNode } from '../../../types';
 import { CornerUpLeft, Trash2, PlusCircle } from 'lucide-react';
-import QuickActionButtonView from '../../ui/molecules/QuickActionButtonView';
+import QuickActionButtonView from '../../../ui/molecules/QuickActionButtonView';
 import { COMPONENT_REGISTRY } from '../registries';
 
 interface QuickActionsToolbarProps {
