@@ -31,6 +31,7 @@ export * from './molecules/properties/content/IconControlView';
 export * from './molecules/properties/content/ImageControlView';
 export * from './molecules/properties/interaction/ActionCardView';
 export * from './molecules/properties/LayoutModeSelectorView';
+export * from './molecules/properties/OverrideDotView';
 export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';

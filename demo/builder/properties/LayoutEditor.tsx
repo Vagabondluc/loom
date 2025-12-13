@@ -3,6 +3,7 @@ import React from 'react';
 import { useBuilderStore } from '../store';
 import { LayoutConfig, Breakpoint, BuilderNode } from '../../../types';
 import { LayoutEditorView } from '../../../ui/molecules/properties/LayoutEditorView';
+import { OverrideDotView } from '../../../ui/molecules/properties/OverrideDotView';
 import { LayoutModeSelector } from './layout/LayoutModeSelector';
 import { resolveEffectiveLayout } from '../../../services/runtime/layoutUtils';
 import { FlexControls } from './layout/FlexControls';
@@ -30,7 +31,7 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
   };
 
   const OverrideDot = ({ prop }: { prop: keyof LayoutConfig }) => (
-    isOverridden(prop) ? <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span> : null
+    isOverridden(prop) ? <OverrideDotView /> : null
   );
 
   const handleUpdate = (updates: Partial<LayoutConfig>, skipHistory = true) => {
@@ -50,20 +51,20 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
         const overrides = node.responsive?.[activeBreakpoint];
         return overrides && overrides[k] !== undefined;
       }}
-      OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span> : null)}
+      OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)}
     >
       {layout.mode === 'flex' && (
-        <FlexControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:false })} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span> : null)} />
+        <FlexControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:false })} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)} />
       )}
 
       {layout.mode === 'grid' && (
-        <GridControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:true })} onSnapshot={snapshot} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span> : null)} />
+        <GridControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:true })} onSnapshot={snapshot} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)} />
       )}
 
       {(layout.mode === 'flex' || layout.mode === 'grid') && (
         <div className="form-control">
           <label className="label text-xs py-1">
-            <span>Gap: {layout.gap || 0} <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span></span>
+            <span>Gap: {layout.gap || 0} <OverrideDotView /></span>
           </label>
           <input
             type="range" min="0" max="12" step="1"
