@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardTitle, CodeLabel } from '../ui';
+import { Card, CardTitle, CodeLabel, Alert } from '../ui';
 import { Map, Link as LinkIcon, AlertTriangle } from 'lucide-react';
 
 interface ImportMap {
@@ -43,10 +43,9 @@ export const Inspector: React.FC = () => {
         </p>
         
         {error && (
-          <div className="alert alert-error mt-4">
-            <AlertTriangle />
-            <span>{error}</span>
-          </div>
+          <Alert variant="error" onClose={() => setError(null)} className="mt-4" icon={<AlertTriangle className="w-5 h-5" />}>
+            {error}
+          </Alert>
         )}
         
         {importMap && (
