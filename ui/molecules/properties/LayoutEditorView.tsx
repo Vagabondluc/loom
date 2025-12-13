@@ -25,6 +25,7 @@ export const LayoutEditorView: React.FC<LayoutEditorViewProps> = ({
   onSnapshot,
   isOverridden,
   OverrideDot,
+  children,
 }) => {
   if (!layout) return null;
 
