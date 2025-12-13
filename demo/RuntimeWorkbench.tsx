@@ -8,7 +8,6 @@ import { useRuntimeStore } from '../stores/runtimeStore';
 import { componentToTemplate } from './builder/palette/utils';
 import { Play, RotateCcw, Bug, Terminal, Activity, XCircle } from 'lucide-react';
 import StageErrorView from '../ui/molecules/StageErrorView';
-import { prelineAccordionTemplate, prelineModalTemplate, prelineTabsTemplate, genericFallbackTemplate } from '../../ui/molecules/RuntimeTemplateStrings';
 import { clsx } from 'clsx';
 
 interface LogEntry {
