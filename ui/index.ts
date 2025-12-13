@@ -20,6 +20,7 @@ export * from './composites/Toolbar';
 export * from './sections/inputs/BasicInputs';
 export * from './sections/inputs/SpecializedInputs';
 export * from './sections/inputs/ValidationForm';
+export * from './sections/InputsSection';
 export * from './ThemeControls';
 export * from './StoryToolbar';
 export * from './StorySidebar';
