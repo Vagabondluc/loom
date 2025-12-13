@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Card, CardTitle, Button } from '../ui';
+import { Card, CardTitle, Button, Badge, EmptyStateView } from '../ui';
 import { useLogicStore } from '../stores/logicStore';
 import { LogicNode } from '../types';
 import { Play, RotateCcw, CheckCircle, Loader2, Info, Settings2 } from 'lucide-react';
@@ -13,7 +13,7 @@ export const LogicLab: React.FC = () => {
   // Default to first flow if none active, or the currently active one
   const displayFlow = activeFlowId ? flows.find(f => f.id === activeFlowId) : flows[0];
 
-  if (!displayFlow) return <div>No flows definition found.</div>;
+  if (!displayFlow) return <EmptyStateView message="No flows definition found." />;
 
   const selectedNode = selectedNodeId ? displayFlow.nodes.find(n => n.id === selectedNodeId) : null;
 
@@ -91,7 +91,7 @@ export const LogicLab: React.FC = () => {
                 <div className="space-y-4 animate-in fade-in">
                     <div className="flex justify-between items-start">
                         <h4 className="font-bold">{selectedNode.label}</h4>
-                        <span className="badge badge-ghost badge-sm font-mono uppercase">{selectedNode.type}</span>
+                        <Badge variant="ghost" size="sm" className="font-mono uppercase">{selectedNode.type}</Badge>
                     </div>
                     <p className="text-sm text-base-content/80">
                       {selectedNode.description}
@@ -190,10 +190,10 @@ export const LogicLab: React.FC = () => {
 
 const StatusBadge = ({ status }: { status: LogicNode['status'] }) => {
   switch (status) {
-    case 'idle': return <span className="badge badge-ghost badge-sm">Pending</span>;
-    case 'running': return <span className="badge badge-info badge-sm animate-pulse">Running</span>;
-    case 'success': return <span className="badge badge-success badge-sm">Done</span>;
-    case 'error': return <span className="badge badge-error badge-sm">Error</span>;
+    case 'idle': return <Badge variant="ghost" size="sm">Pending</Badge>;
+    case 'running': return <Badge variant="info" size="sm" className="animate-pulse">Running</Badge>;
+    case 'success': return <Badge variant="success" size="sm">Done</Badge>;
+    case 'error': return <Badge variant="error" size="sm">Error</Badge>;
     default: return null;
   }
 };

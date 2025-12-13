@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Card, Button } from '../../ui';
+import { Card, Button, EmptyStateView } from '../../ui';
 import { useToastStore } from '../../stores/toastStore';
 import { Search, SlidersHorizontal, Tag as TagIcon, X } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -194,12 +194,7 @@ export const IconLibrarySection: React.FC = () => {
         {/* Icon Grid */}
         <div className="p-2 min-h-[400px]">
             {displayedIcons.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 opacity-50 bg-base-200/30 rounded-lg border border-dashed border-base-content/10">
-                <Search className="w-8 h-8 mb-2 opacity-50" />
-                <p>No icons found matching "{search}"</p>
-                {activeCategory && <p className="text-xs mt-1">in category: {activeCategory}</p>}
-                <button onClick={() => { setSearch(''); setActiveCategory(null); }} className="btn btn-xs btn-link mt-2">Clear Filters</button>
-            </div>
+            <EmptyStateView message="No icons found" subMessage="Try searching for another category." />
             ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
                 {displayedIcons.map(([name, IconComponent]) => (

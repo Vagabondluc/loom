@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, CardTitle, Button, CodeLabel } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge, EmptyStateView } from '../../ui';
 import { useBuilderStore } from '../builder/store';
 import { Save, Trash2, FolderOpen, Database } from 'lucide-react';
 
@@ -40,12 +40,9 @@ export const StorageSection: React.FC = () => {
         </CardTitle>
         
         <div className="overflow-x-auto mt-4">
-          {savedProjects.length === 0 ? (
-             <div className="text-center py-8 opacity-50 bg-base-200 rounded-lg border border-dashed border-base-content/20">
-                <p>No saved projects found in local storage.</p>
-                <p className="text-xs mt-2">Click "Save Snapshot" to create a test record.</p>
-             </div>
-          ) : (
+            {savedProjects.length === 0 ? (
+                   <EmptyStateView message="No saved projects found in local storage." subMessage={'Click "Save Snapshot" to create a test record.'} />
+                 ) : (
             <table className="table table-zebra w-full">
               <thead>
                 <tr>
@@ -62,7 +59,7 @@ export const StorageSection: React.FC = () => {
                     <td className="font-mono text-xs opacity-50">#{proj.id}</td>
                     <td className="font-bold">{proj.name}</td>
                     <td className="text-sm opacity-70">{proj.updatedAt.toLocaleString()}</td>
-                    <td><div className="badge badge-sm badge-ghost">{Object.keys(proj.nodes).length} nodes</div></td>
+                    <td><Badge variant="ghost" size="sm">{Object.keys(proj.nodes).length} nodes</Badge></td>
                     <td className="flex justify-end gap-2">
                       <button 
                         className="btn btn-sm btn-ghost gap-2"

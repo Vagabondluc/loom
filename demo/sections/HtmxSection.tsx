@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { Card, CardTitle, Button, CodeLabel } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge } from '../../ui';
 import { useRuntimeStore } from '../../stores/runtimeStore';
 import { RefreshCw, Database } from 'lucide-react';
 
@@ -55,7 +55,7 @@ export const HtmxSection: React.FC = () => {
            <div className="space-y-4">
               <div className="p-4 border border-dashed border-primary/30 rounded-lg bg-base-100">
                   <div className="flex flex-col gap-2">
-                      <div className="badge badge-primary badge-outline text-xs">Data Panel</div>
+                      <Badge variant="primary" size="xs" outline>Data Panel</Badge>
                       <div className="text-sm font-bold">User: {'{{api.user.name}}'}</div>
                       <div className="text-xs opacity-70">Email: {'{{api.user.email}}'}</div>
                   </div>

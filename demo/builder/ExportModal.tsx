@@ -1,11 +1,13 @@
 
 import React, { useState, useMemo } from 'react';
-import { Modal, Button, Badge } from '../../ui';
+import { Modal, Button, Badge, PanelHeaderView } from '../../ui';
 import { useBuilderStore } from './store';
 import { validateImport } from './serialization';
 import { EXPORT_TARGETS, ExportFidelity } from './export/manifest';
 import { validateExport } from './export/validator';
 import { Upload, Check, Copy, AlertTriangle, AlertCircle, Info } from 'lucide-react';
+import ExportTargetItemView from '../../ui/molecules/ExportTargetItemView';
+import ValidationIssueView from '../../ui/molecules/ValidationIssueView';
 import { clsx } from 'clsx';
 
 interface ExportModalProps {
@@ -96,24 +98,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onClose }) => {
                 <div className="flex-1 overflow-y-auto p-2 space-y-1">
                     <div className="px-2 py-1 text-[10px] font-bold uppercase opacity-50 tracking-wider">Targets</div>
                     {EXPORT_TARGETS.map(target => (
-                        <button
-                            key={target.id}
-                            disabled={target.disabled}
-                            onClick={() => setSelectedTargetId(target.id)}
-                            className={clsx(
-                                "w-full text-left p-3 rounded-lg flex items-center gap-3 transition-all",
-                                selectedTargetId === target.id 
-                                    ? "bg-base-100 shadow-sm border border-base-content/10 ring-1 ring-primary/20" 
-                                    : "hover:bg-base-300/50 opacity-70 hover:opacity-100",
-                                target.disabled && "opacity-40 cursor-not-allowed"
-                            )}
-                        >
-                            <target.icon className={clsx("w-5 h-5", selectedTargetId === target.id ? "text-primary" : "opacity-50")} />
-                            <div className="flex-1">
-                                <div className="text-xs font-bold">{target.label}</div>
-                                <div className="text-[10px] opacity-60 truncate">{target.description}</div>
-                            </div>
-                        </button>
+                        <ExportTargetItemView key={target.id} target={target as any} selected={selectedTargetId === target.id} onSelect={(id) => setSelectedTargetId(id)} />
                     ))}
                 </div>
             ) : (
@@ -127,41 +112,31 @@ export const ExportModal: React.FC<ExportModalProps> = ({ open, onClose }) => {
         <div className="flex-1 flex flex-col bg-base-100">
             {mode === 'export' ? (
                 <>
-                    <div className="p-4 border-b border-base-300 flex justify-between items-start bg-base-100">
-                        <div>
-                            <div className="flex items-center gap-2 mb-1">
-                                <h2 className="text-lg font-bold">{selectedTarget.label}</h2>
-                                <FidelityBadge fidelity={selectedTarget.fidelity} />
-                            </div>
-                            <p className="text-sm opacity-70">{selectedTarget.description}</p>
-                        </div>
-                        <Button 
-                            size="sm" 
-                            variant="primary" 
-                            onClick={handleCopy}
-                            className="gap-2"
-                        >
-                            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            {copied ? 'Copied' : 'Copy Code'}
-                        </Button>
-                    </div>
+                                        <PanelHeaderView
+                                            title={(
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <h2 className="text-lg font-bold">{selectedTarget.label}</h2>
+                                                        <FidelityBadge fidelity={selectedTarget.fidelity} />
+                                                    </div>
+                                                    <p className="text-sm opacity-70">{selectedTarget.description}</p>
+                                                </div>
+                                            )}
+                                            actions={(
+                                                <Button size="sm" variant="primary" onClick={handleCopy} className="gap-2">
+                                                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                                                    {copied ? 'Copied' : 'Copy Code'}
+                                                </Button>
+                                            )}
+                                            className="p-4 border-b border-base-300 flex justify-between items-start bg-base-100"
+                                        />
 
                     {validationIssues.length > 0 && (
                         <div className="bg-base-200/50 border-b border-base-300 p-3 space-y-1">
                             <div className="text-[10px] font-bold uppercase opacity-50 tracking-wider mb-1 px-1">Fidelity Report</div>
-                            {validationIssues.map((issue) => (
-                                <div key={issue.id} className={clsx(
-                                    "flex items-start gap-2 text-xs p-2 rounded",
-                                    issue.type === 'error' && "bg-error/10 text-error",
-                                    issue.type === 'warning' && "bg-warning/10 text-warning-content",
-                                    issue.type === 'info' && "bg-info/10 text-info-content"
-                                )}>
-                                    {issue.type === 'error' && <AlertCircle className="w-4 h-4 flex-shrink-0" />}
-                                    {issue.type === 'warning' && <AlertTriangle className="w-4 h-4 flex-shrink-0" />}
-                                    {issue.type === 'info' && <Info className="w-4 h-4 flex-shrink-0" />}
-                                    <span className="opacity-90 leading-relaxed">{issue.message}</span>
-                                </div>
-                            ))}
+                                    {validationIssues.map((issue) => (
+                                        <ValidationIssueView key={issue.id} issue={issue as any} />
+                                    ))}
                         </div>
                     )}
 

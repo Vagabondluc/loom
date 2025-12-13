@@ -84,8 +84,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ onExport }) => {
 
         {/* Results */}
         <div className="max-h-[300px] overflow-y-auto p-2">
-          {filteredActions.length === 0 ? (
-            <div className="text-center py-8 opacity-50 text-sm">No commands found.</div>
+            {filteredActions.length === 0 ? (
+              <EmptyStateView message="No commands found." className="py-2 text-sm" />
           ) : (
             <ul className="menu menu-sm w-full p-0">
               {filteredActions.map((action, idx) => (

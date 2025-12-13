@@ -58,3 +58,8 @@ Entries:
  - 2025-12-13: Implemented `FlexControlsView` and `GridControlsView` in `ui/molecules/properties` and updated demo adapters to use them; shim purity passed. — tool-assisted
  - 2025-12-13: Created PR #11: Phase 27: Extract LayoutEditorView (adapter/view split) targeting `refactor/extract-runtime-export-shims`. — tool-assisted
  - 2025-12-13: Rebased `refactor/phase27-layout-editor` on remote, resolved unstaged changes and re-pushed branch. — tool-assisted
+ - 2025-12-13: Created `ui/molecules/PanelHeaderView.tsx`, replaced inline panel headers across builder and palette panes, and exported it via `ui/index.ts`. Changes committed to `refactor/phase27-layout-editor`. — tool-assisted
+ - 2025-12-13: Added `TemplateCardView` to `ui/molecules` and wired it into `demo/builder/palette/TemplatesTab.tsx`. — tool-assisted
+ - 2025-12-13: Added `TemplateCardView` to `ui/molecules` and wired it into `demo/builder/palette/TemplatesTab.tsx`. — tool-assisted
+ - 2025-12-13: Added `DraggableBlockView` and replaced parsed-markdown blocks with it in `demo/builder/palette/MarkdownTab.tsx`. — tool-assisted
+ - 2025-12-13: Extracted `ComponentCardView` to `ui/molecules` and replaced inline cards in `demo/builder/palette/ComponentsTab.tsx`. — tool-assisted

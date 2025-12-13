@@ -4,6 +4,8 @@ import { usePaletteInteractions } from './usePaletteInteractions';
 import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
+import { EmptyStateView, PanelHeaderView } from '../../../ui';
+import { DraggableBlockView } from '../../../ui/molecules/DraggableBlockView';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
 interface ParsedBlock {
@@ -63,7 +65,7 @@ export const MarkdownTab: React.FC = () => {
         });
       }
 
-      // 4. Lists -> Individual Paragraphs with bullets (Simple mapping for now)
+      // 4. Lists -> Individual Paragraphs with bullets (basic mapping for now)
       else if (token.type === 'list') {
         token.items.forEach((item: any) => {
            blocks.push({
@@ -103,9 +105,10 @@ export const MarkdownTab: React.FC = () => {
 
   return (
     <div className="border-b border-base-300 flex flex-col h-full">
-      <h3 className="text-xs font-bold uppercase tracking-wider opacity-60 bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm">
-        From Markdown
-      </h3>
+      <PanelHeaderView
+        title={<span className="text-xs font-bold uppercase tracking-wider opacity-60">From Markdown</span>}
+        className="p-0 bg-base-300/50 py-3 px-4 z-10 border-b border-base-300 shadow-sm"
+      />
       <div className="p-4 space-y-4 flex-1 flex flex-col min-h-0">
         <div className="form-control flex-shrink-0">
           <textarea 
@@ -127,30 +130,19 @@ export const MarkdownTab: React.FC = () => {
               if (!template) return null;
 
               return (
-                  <div 
-                    key={i}
-                    tabIndex={0}
-                    role="button"
-                    style={{ touchAction: 'none' }}
-                    onPointerDown={(e) => handleMouseDown(e, template)}
-                    onKeyDown={(e) => handleKeyDown(e, template)}
-                    className="p-3 bg-base-100 border border-base-300 rounded text-xs cursor-grab active:cursor-grabbing hover:border-primary flex items-center gap-3 transition-colors hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
-                  >
-                    <span className="opacity-50">{block.icon}</span>
-                    <div className="truncate flex-1">
-                      <span className="font-bold mr-2 text-[10px] opacity-40 uppercase">{block.type}</span>
-                      {block.tagName && (
-                        <span className="badge badge-xs badge-ghost mr-2">{block.tagName}</span>
-                      )}
-                      <span className="truncate">{block.label}</span>
-                    </div>
-                  </div>
+                <DraggableBlockView
+                  key={i}
+                  icon={block.icon}
+                  typeLabel={block.type}
+                  tagName={block.tagName}
+                  label={block.label}
+                  onPointerDown={(e) => handleMouseDown(e, template)}
+                  onKeyDown={(e) => handleKeyDown(e, template)}
+                />
               );
           })}
           {parsedBlocks.length === 0 && (
-            <div className="p-4 text-center opacity-40 text-xs border border-dashed border-base-content/20 rounded">
-              No blocks generated yet.
-            </div>
+            <EmptyStateView message="No blocks generated yet." className="text-xs" />
           )}
         </div>
       </div>
