@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useBuilderStore } from './store';
 import { useToastStore } from '../../stores/toastStore';
@@ -18,7 +17,6 @@ import TemplateWizardStepHeaderView from '../../ui/molecules/TemplateWizardStepH
 import { clsx } from 'clsx';
 import TemplateWizardContextView from '../../ui/molecules/TemplateWizardContextView';
 import TemplateWizardErrorAlertView from '../../ui/molecules/TemplateWizardErrorAlertView';
-import TemplateWizardSectionConfigView from '../../ui/molecules/TemplateWizardSectionConfigView';
 
 interface TemplateWizardProps {
   open: boolean;
@@ -277,22 +275,28 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
             <section>
                 <TemplateWizardStepHeaderView index={4} title="Structure & Overrides" bg="bg-accent/10" text="text-accent" />
                 
-                <TemplateWizardSectionsView
-                    pageType={pageType}
-                    suggestions={SECTION_SUGGESTIONS}
-                    selectedSections={selectedSections}
-                    expandedSection={expandedSection}
-                    onToggleSelect={(sec, val) => {
-                        setSelectedSections(prev => ({ ...prev, [sec]: val }));
-                        if (!val && expandedSection === sec) setExpandedSection(null);
-                    }}
-                    onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
-                    sectionConfig={sectionConfig}
-                    sectionInstructions={SECTION_INSTRUCTION}
-                />
-                {expandedSection && selectedSections[expandedSection] && (
-                    <TemplateWizardSectionConfigView section={expandedSection} config={sectionConfig[expandedSection]} onChange={(key, val) => updateSectionConfig(expandedSection, key, val)} />
-                )}
+            <TemplateWizardSectionsView
+              pageType={pageType}
+              suggestions={SECTION_SUGGESTIONS}
+              selectedSections={selectedSections}
+              expandedSection={expandedSection}
+              onToggleSelect={(sec, val) => {
+                setSelectedSections(prev => ({ ...prev, [sec]: val }));
+                if (!val && expandedSection === sec) setExpandedSection(null);
+              }}
+              onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
+              sectionConfig={sectionConfig}
+              sectionInstructions={SECTION_INSTRUCTION}
+              onSectionConfigChange={updateSectionConfig}
+            />
+
+            {expandedSection && selectedSections[expandedSection] && (
+              <TemplateWizardSectionConfigView
+                section={expandedSection}
+                config={sectionConfig[expandedSection]}
+                onChange={(key, val) => updateSectionConfig(expandedSection, key, val)}
+              />
+            )}
             </section>
                 </div>
 
