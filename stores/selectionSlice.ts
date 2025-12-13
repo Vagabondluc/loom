@@ -10,7 +10,7 @@ export const createSelectionSlice: StateCreator<BuilderState, [], [], SelectionS
   setHoveredNode: (id) => set({ hoveredNodeId: id }),
   
   startDrag: (type, payload) => set({ dragState: { isDragging: true, type, payload, activeDropZone: null } }),
-  setActiveDropZone: (zone) => set({ dragState: (prev) => ({ ...prev, activeDropZone: zone }) } as any),
+  setActiveDropZone: (zone) => set((state) => ({ dragState: { ...state.dragState, activeDropZone: zone } })),
   endDrag: () => set({ dragState: { isDragging: false, type: null, payload: null, activeDropZone: null } }),
   setDraggedComponent: (id) => set({ draggedComponentId: id }),
   draggedComponentId: null
