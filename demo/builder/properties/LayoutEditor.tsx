@@ -58,7 +58,7 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
       {(layout.mode === 'flex' || layout.mode === 'grid') && (
         <div className="form-control">
           <label className="label text-xs py-1">
-            <span>Gap: {layout.gap || 0} <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span></span>
+            <span>Gap: {layout.gap || 0} <OverrideDot prop="gap" /></span>
           </label>
           <input
             type="range" min="0" max="12" step="1"
