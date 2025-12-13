@@ -44,3 +44,14 @@ Entries:
  - 2025-12-13: Extracted `TablesSection` to `ui/sections/TablesSection` and replaced `demo/` shim. — tool-assisted
  - 2025-12-13: Extracted `CarouselSection` to `ui/sections/CarouselSection` and replaced `demo/` shim. — tool-assisted
  - 2025-12-13: Added `PR_SUMMARY.md` with extraction details and paused further extraction for review. — tool-assisted
+ - 2025-12-13: Created Phase 27: Feedback & Interactive UI Extraction candidate list and per-component checklist in `todo.md`. — tool-assisted
+ - 2025-12-13: Confirmed shim purity with `scripts/check-shim-purity.sh`; decision made: do not run `npm run build` during active refactor. — tool-assisted
+ - 2025-12-13: Rebased `refactor/extract-runtime-export-shims` on remote head and paused for PR review. — tool-assisted
+ - 2025-12-13: Added detailed Phase 27 Execution Backlog focusing on `demo/builder/properties` component shims and extraction plan. — tool-assisted
+ - 2025-12-13: Audited `LayoutEditor.tsx`: found it uses `services/runtime/layoutUtils` and only demo store selectors; flagged as safe to extract UI view. — tool-assisted
+ - 2025-12-13: Scheduled `LayoutEditor` as first extraction candidate (priority 1). — tool-assisted
+ - 2025-12-13: Marked `LayoutEditor` audit complete and added task to scaffold `ui/molecules/properties/LayoutEditorView.tsx` as a presentational skeleton. — tool-assisted
+ - 2025-12-13: Created `ui/molecules/properties/LayoutEditorView.tsx` skeleton and rewired `demo/builder/properties/LayoutEditor.tsx` to be an adapter wrapper using `LayoutEditorView`. — tool-assisted
+ - 2025-12-13: Ran `scripts/check-shim-purity.sh` after the change; checks passed. — tool-assisted
+ - 2025-12-13: Completed adapter wrapper for `LayoutEditor` to use `LayoutEditorView`; added next task to extract `FlexControls` and `GridControls`. — tool-assisted
+ - 2025-12-13: Added detailed subtasks for `FlexControls` and `GridControls` extraction: audit, presentational view, adapter updates, shim purity checks. — tool-assisted
