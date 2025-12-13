@@ -39,3 +39,5 @@ Entries:
  - 2025-12-13: Added CI check in `.github/workflows/no-node.yml` to forbid `.node.` files and node APIs outside `docs/tools`. — tool-assisted
  - 2025-12-12: Added scope note and invariants to `todo.md` clarifying that governance and CI belong in `/docs` and CI flows, not as plan tasks; annotated governance sections as [META]. — tool-assisted
  - 2025-12-12: Added `scripts/check-shim-purity.sh` and CI enforcement job to `.github/workflows/ci-enforce.yml` to enforce runtime shim purity; integrated into `scripts/check-contract.sh`. — tool-assisted
+ - 2025-12-13: Extracted `CompositeSection` to `ui/sections/CompositeSection` and replaced `demo/` shim. — tool-assisted
+ - 2025-12-13: Extracted `StatusSection` to `ui/sections/StatusSection` and replaced `demo/` shim. — tool-assisted

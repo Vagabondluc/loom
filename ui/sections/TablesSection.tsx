@@ -1,4 +1,9 @@
-export { TablesSection } from '../../ui/sections/TablesSection';
+import React from 'react';
+import { Card, CardTitle, CodeLabel } from '../index';
+
+export const TablesSection: React.FC = () => {
+  return (
+    <section id="tables" className="space-y-6 scroll-mt-24">
       <div className="prose max-w-none">
         <h2 className="text-3xl font-bold border-b pb-2">Tables</h2>
         <p className="text-base-content/70">
@@ -10,7 +15,6 @@ export { TablesSection } from '../../ui/sections/TablesSection';
         <CardTitle>Standard & Zebra</CardTitle>
         <div className="overflow-x-auto">
           <table className="table table-zebra">
-            {/* head */}
             <thead>
               <tr>
                 <th></th>
@@ -20,21 +24,18 @@ export { TablesSection } from '../../ui/sections/TablesSection';
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
               <tr>
                 <th>1</th>
                 <td>Cy Ganderton</td>
                 <td>Quality Control Specialist</td>
                 <td>Blue</td>
               </tr>
-              {/* row 2 */}
               <tr>
                 <th>2</th>
                 <td>Hart Hagerty</td>
                 <td>Desktop Support Technician</td>
                 <td>Purple</td>
               </tr>
-              {/* row 3 */}
               <tr>
                 <th>3</th>
                 <td>Brice Swyre</td>
@@ -102,3 +103,5 @@ export { TablesSection } from '../../ui/sections/TablesSection';
         </Card>
       </div>
     </section>
+  );
+};

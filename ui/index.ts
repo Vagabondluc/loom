@@ -40,3 +40,4 @@ export * from './sections/data-display/StatsDisplay';
 export * from './sections/NavigationSection';
 export * from './sections/CompositeSection';
 export * from './sections/StatusSection';
+export * from './sections/TablesSection';

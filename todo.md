@@ -245,6 +245,8 @@ Before merging:
 - [x] StoryPreview (demo/story/StoryPreview.tsx) — Extracted to `ui/`.
 - [x] StoryToolbar (demo/story/StoryToolbar.tsx) — Extracted to `ui/`.
 Additional story components extracted: StoryEditor, StorySidebar, StoryLogicView.
+- [x] CompositeSection (demo/sections/CompositeSection.tsx) — Extracted to `ui/sections/CompositeSection.tsx`.
+- [x] StatusSection (demo/sections/StatusSection.tsx) — Extracted to `ui/sections/StatusSection.tsx`.
 
 Recommendation: For each candidate, validate there are no editor-specific imports (builder store, demo-only utilities). If none, move to `ui/` and replace original with a shim re-export.
 
