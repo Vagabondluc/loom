@@ -22,3 +22,4 @@ export * from './StoryToolbar';
 export * from './StorySidebar';
 export * from './StoryPreview';
 export * from './StoryEditor';
+export * from './StoryLogicView';
