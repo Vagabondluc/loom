@@ -3,6 +3,7 @@ import React from 'react';
 import { useBuilderStore } from '../store';
 import { BuilderNode } from '../../../types';
 import { CornerUpLeft, Trash2, PlusCircle } from 'lucide-react';
+import QuickActionButtonView from '../../ui/molecules/QuickActionButtonView';
 import { COMPONENT_REGISTRY } from '../registries';
 
 interface QuickActionsToolbarProps {
@@ -26,32 +27,14 @@ export const QuickActionsToolbar: React.FC<QuickActionsToolbarProps> = ({ node, 
       }}
     >
       {node.parentId && (
-        <button 
-          className="btn btn-xs btn-ghost btn-square" 
-          title="Select Parent"
-          onClick={(e) => { e.stopPropagation(); selectNode(node.parentId); }}
-        >
-          <CornerUpLeft className="w-3 h-3" />
-        </button>
+        <QuickActionButtonView title="Select Parent" icon={<CornerUpLeft className="w-3 h-3" />} onClick={(e) => { e.stopPropagation(); selectNode(node.parentId); }} />
       )}
 
       {def.allowChildren && (
-         <button 
-           className="btn btn-xs btn-ghost btn-square" 
-           title="Add Child (opens library)"
-           onClick={(e) => { e.stopPropagation(); /* TODO: Implement add child flow */ }}
-         >
-           <PlusCircle className="w-3 h-3" />
-         </button>
+        <QuickActionButtonView title="Add Child (opens library)" icon={<PlusCircle className="w-3 h-3" />} onClick={(e) => { e.stopPropagation(); /* TODO: add child flow */ }} />
       )}
 
-      <button 
-        className="btn btn-xs btn-ghost btn-square text-error" 
-        title="Delete Node"
-        onClick={(e) => { e.stopPropagation(); deleteNode(node.id); }}
-      >
-        <Trash2 className="w-3 h-3" />
-      </button>
+      <QuickActionButtonView title="Delete Node" icon={<Trash2 className="w-3 h-3" />} className="text-error" onClick={(e) => { e.stopPropagation(); deleteNode(node.id); }} />
     </div>
   );
 };
