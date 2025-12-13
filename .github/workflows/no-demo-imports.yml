@@ -1,0 +1,17 @@
+name: 'CI - No Demo Imports in Runtime'
+
+on: [push, pull_request]
+
+jobs:
+  check-no-demo-imports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run contract checks
+        run: |
+          if [ -f "docs/tools/check-contract.node.mjs" ]; then
+            node docs/tools/check-contract.node.mjs
+          else
+            bash ./scripts/check-contract.sh
+          fi

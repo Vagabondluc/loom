@@ -1,0 +1,22 @@
+name: CI Enforcement
+
+on:
+  push:
+    branches: ["main", "refactor/canonical-structure"]
+  pull_request:
+
+jobs:
+  check-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Enforce demo runtime shim purity
+        run: bash ./scripts/check-shim-purity.sh
+      - name: Run contract checks
+        run: |
+          if [ -f "docs/tools/check-contract.node.mjs" ]; then
+            node docs/tools/check-contract.node.mjs
+          else
+            bash ./scripts/check-contract.sh
+          fi

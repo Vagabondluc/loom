@@ -4,6 +4,7 @@ import { useBuilderStore } from './store';
 import { useToastStore } from '../../stores/toastStore';
 import { aiGeneratedTemplateSchema } from '../../services/aiTemplateSchema';
 import { buildTemplateWizardPrompt, ContentStrategy, SectionConfig } from '../../services/promptBuilder';
+import { COMPONENT_REGISTRY } from './registries';
 import { ai } from '../../services/ai';
 import { Type as GenAiType } from '@google/genai';
 import { 
@@ -117,7 +118,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
             sections: activeSections,
             contentStrategy,
             sectionConfig
-        });
+        }, Object.keys(COMPONENT_REGISTRY));
         
         const timeoutPromise = new Promise((_, reject) => 
             setTimeout(() => reject(new Error("Request timed out. Please try again.")), 60000)

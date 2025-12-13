@@ -1,24 +1,4 @@
-import React, { useRef } from 'react';
-import { Card, CardTitle, CodeLabel } from '../../ui';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-export const CarouselSection: React.FC = () => {
-  const snapScrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollSnap = (direction: 'left' | 'right') => {
-    if (snapScrollRef.current) {
-      const container = snapScrollRef.current;
-      // Scroll by 75% of the container width for a natural page-turn feel
-      const scrollAmount = container.clientWidth * 0.75; 
-      container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  return (
-    <section id="carousel" className="space-y-6 scroll-mt-24">
+export { CarouselSection } from '../../ui/sections/CarouselSection';
       <div className="prose max-w-none">
         <h2 className="text-3xl font-bold border-b pb-2">Carousel</h2>
         <p className="text-base-content/70">
@@ -90,5 +70,3 @@ export const CarouselSection: React.FC = () => {
         </Card>
       </div>
     </section>
-  );
-};

@@ -1,9 +1,4 @@
-import React from 'react';
-import { Card, CardTitle, CodeLabel } from '../../ui';
-
-export const TablesSection: React.FC = () => {
-  return (
-    <section id="tables" className="space-y-6 scroll-mt-24">
+export { TablesSection } from '../../ui/sections/TablesSection';
       <div className="prose max-w-none">
         <h2 className="text-3xl font-bold border-b pb-2">Tables</h2>
         <p className="text-base-content/70">
@@ -107,5 +102,3 @@ export const TablesSection: React.FC = () => {
         </Card>
       </div>
     </section>
-  );
-};

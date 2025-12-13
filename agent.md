@@ -140,6 +140,11 @@ The following are not used:
 
 The agent operates under the following constraints:
 *   Node.js APIs (`process`, `require`, `fs`, `Buffer`, etc.) are not used.
+	* Exception (narrow): Node.js-based audit tools are permitted only within `docs/tools/`. These tools are intended for governance and CI only and must:
+		- Never be run in the GAIS browser runtime
+		- Never be imported or required by runtime code
+		- Not be used for build or product logic
+	* Exception: Node.js based audit tools are allowed only under `docs/tools/` and are intended to run in external CI or a local audit environment. These tools must never be executed in the GAIS browser runtime.
 *   All code is browser-native.
 *   Build tools (`package.json`, `webpack.config.js`, etc.) are not generated.
 *   New dependencies are not added to the import map without explicit instruction and a corresponding entry in `docs/decisions.md`.

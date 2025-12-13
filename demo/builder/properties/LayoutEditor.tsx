@@ -6,6 +6,7 @@ import { clsx } from 'clsx';
 import { Badge } from '../../../ui';
 import { Layout, Smartphone, Tablet, Monitor, Undo2 } from 'lucide-react';
 import { LayoutModeSelector } from './layout/LayoutModeSelector';
+import { resolveEffectiveLayout } from '../../../services/runtime/layoutUtils';
 import { FlexControls } from './layout/FlexControls';
 import { GridControls } from './layout/GridControls';
 
@@ -20,16 +21,7 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
   const updateNodeLayout = useBuilderStore(s => s.updateNodeLayout);
   const snapshot = useBuilderStore(s => s.snapshot);
 
-  const resolveEffectiveLayout = (n: BuilderNode, bp: Breakpoint): LayoutConfig => {
-    let effective = { ...n.layout } as LayoutConfig;
-    if (bp === 'tablet' || bp === 'desktop') {
-        if (n.responsive?.tablet) effective = { ...effective, ...n.responsive.tablet };
-    }
-    if (bp === 'desktop') {
-        if (n.responsive?.desktop) effective = { ...effective, ...n.responsive.desktop };
-    }
-    return effective;
-  };
+  
 
   const layout = resolveEffectiveLayout(node, activeBreakpoint);
 

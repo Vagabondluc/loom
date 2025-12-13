@@ -7,6 +7,12 @@
 2.  **Atomicity:** Every task must be atomic, actionable, and represent a single, verifiable change.
 3.  **Decomposition:** Large requests will be broken down into multiple tasks, organized into phases. This `todo.md` is often refilled from a specification document in `/docs/`.
 
+> ⚠️ Scope Note
+>
+> This `todo.md` tracks **architectural and feature execution only**. Governance, CI enforcement, and audit tooling live in `/docs` and CI workflows and are **not** tracked as executable tasks here unless they directly unblock a phase step.
+
+**Invariant:** Execution plans must not become policy documents.
+
 
 
 # Project Status
@@ -88,30 +94,31 @@ These epics represent long-term goals that will build upon the completed phases 
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout**
 
 > **Invariant:** No GAIS workarounds in this phase.
 
 ### GAIS Protections
+> Note: This section captures governance constraints and protections. These are ambient constraints (META) and not execution tasks unless they directly unblock a phase.
 
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
-- [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
-- [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
-- [ ] Confirm docs are not moving yet
+- [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
+- [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
+- [x] Confirm docs are not moving yet
 
 ---
 
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 
@@ -187,7 +194,7 @@ If something breaks: fix structure, **not** types.
 
 ---
 
-### 8. Add CI Rules (Clean Version Only)
+### 8. Add CI Rules (Clean Version Only) [META]
 
 Now that the structure is clean:
 - [ ] Add CI rule: forbid imports from `demo/**` outside `demo/**`
@@ -217,6 +224,40 @@ Each commit should compile independently.
 
 Before merging:
 - [ ] No duplicate files exist
+
+---
+
+### Execution Progress: File Movement (Status)
+
+- [x] Full `utils/` move pass — canonical utils moved to `services/utils` (lorem, componentToTemplate)
+- [x] Full `stores/` move pass — canonical slices and helpers moved to `stores/` (projectSlice, treeSlice, uiSlice, selectionSlice)
+- [x] Full `services/` move pass — export/runtime logic moved to `services/` and demo files shimmed
+- [ ] Full `ui/` move pass — pending: review generic UI components to extract into `ui/` if appropriate
+- [x] `config/` normalization — target config files moved to `config/` and pluralized where needed
+- [ ] Final `demo/` isolation pass — pending: verify only UI + shims remain in `demo/`
+ - [ ] Final `demo/` isolation pass — pending: verify only UI + shims remain in `demo/`
+- [~] TS integrity sweep — editor TS checks pass for changed files; CI `tsc` will run on PR
+- [ ] Final validation checklist — pending: final CI and manual review
+ - [ ] Final validation checklist — pending: final CI and manual review
+ - [x] PR Summary added: `PR_SUMMARY.md` — ready for review
+
+#### UI Move Pass — Candidate List (Initial)
+
+- [x] ThemePreview (demo/theme/ThemePreview.tsx) — Preview UI; candidate for `ui/` if reused; extracted.
+- [x] ThemeControls (demo/theme/ThemeControls.tsx) — Control UI; candidate only if it is generic; extracted.
+- [x] StoryPreview (demo/story/StoryPreview.tsx) — Extracted to `ui/`.
+- [x] StoryToolbar (demo/story/StoryToolbar.tsx) — Extracted to `ui/`.
+Additional story components extracted: StoryEditor, StorySidebar, StoryLogicView.
+- [x] CompositeSection (demo/sections/CompositeSection.tsx) — Extracted to `ui/sections/CompositeSection.tsx`.
+- [x] StatusSection (demo/sections/StatusSection.tsx) — Extracted to `ui/sections/StatusSection.tsx`.
+ - [x] TablesSection (demo/sections/TablesSection.tsx) — Extracted to `ui/sections/TablesSection.tsx`.
+ - [x] CarouselSection (demo/sections/CarouselSection.tsx) — Extracted to `ui/sections/CarouselSection.tsx`.
+
+Recommendation: For each candidate, validate there are no editor-specific imports (builder store, demo-only utilities). If none, move to `ui/` and replace original with a shim re-export.
+
+
+Notes: The PR `refactor/extract-runtime-export-shims` contains many of these changes; CI shim purity passed while contract checks flag pre-existing documentation issues that will be remediated in a separate PR.
+
 - [ ] No empty legacy files exist
 - [ ] All imports point to canonical paths
 - [ ] CI rules pass
@@ -265,27 +306,27 @@ After this phase is merged:
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout`
 
 > **Invariant:** No GAIS workarounds in this phase.
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
-- [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
-- [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
-- [ ] Confirm docs are not moving yet
+- [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
+- [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
+- [x] Confirm docs are not moving yet
 
 ---
 
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 
@@ -458,14 +499,14 @@ This is a VS Code–specific migration checklist, written as an execution playbo
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout**
 
 > **Invariant:** No GAIS workarounds in this phase.
 
 ---
 
-### 1. Freeze Authority & Scope
+### 1. Freeze Authority & Scope [META]
 
 - [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
 - [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
@@ -476,9 +517,9 @@ This is a VS Code–specific migration checklist, written as an execution playbo
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 

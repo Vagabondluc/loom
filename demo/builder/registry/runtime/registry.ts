@@ -1,5 +1,2 @@
 
-import { runtimeAdapterRegistry } from './RuntimeAdapterRegistry';
-
-export const getAdapter = (node: any) => runtimeAdapterRegistry.getAdapterForNode(node);
-export { runtimeAdapterRegistry };
+export { getAdapter, runtimeAdapterRegistry } from '../../../../services/registry/runtime/registry';

@@ -1,6 +1,5 @@
 
 import { BuilderNode } from '../types';
-import { COMPONENT_REGISTRY } from '../demo/builder/registries';
 
 const serializeNode = (
   nodeId: string, 
@@ -93,8 +92,8 @@ interface WizardInput {
     contentStrategy: ContentStrategy;
 }
 
-export const buildTemplateWizardPrompt = (input: WizardInput): string => {
-    const availableComponents = Object.keys(COMPONENT_REGISTRY).join(', ');
+export const buildTemplateWizardPrompt = (input: WizardInput, availableComponents: string[] = []): string => {
+  const componentsList = availableComponents.length ? availableComponents.join(', ') : '';
 
     // Generate specific instructions based on Content Strategy
     let textInstructions = "";
@@ -191,7 +190,7 @@ ${sectionInstructions}
 1.  The main container must have the ID "root". This will be your root node.
 2.  Generate a unique, random string ID for every node (e.g., 'node-1a2b3c'). The 'root' node should also have a unique ID.
 3.  Construct a full page layout based on the user's requirements, arranging the requested sections in a logical order.
-4.  Use the following available component types: \`${availableComponents}\`.
+4.  Use the following available component types: \`${componentsList}\`.
 5.  Use DaisyUI and Tailwind CSS classes for styling.
 6.  For layout, use the 'layout' property. For example, a flex container would be \`"layout": { "mode": "flex", "direction": "col", "gap": 4 }\`.
 7.  The \`parentId\` for direct children of the root container should be the ID of the root node. For all other nodes, it should be the ID of their parent. The root node's \`parentId\` should be \`null\`.
