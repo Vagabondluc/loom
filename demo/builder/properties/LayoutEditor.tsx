@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 import { Badge } from '../../../ui';
 import { Layout, Smartphone, Tablet, Monitor, Undo2 } from 'lucide-react';
 import { LayoutModeSelector } from './layout/LayoutModeSelector';
-import { resolveEffectiveLayout } from '../../layoutUtils';
+import { resolveEffectiveLayout } from '../../../services/runtime/layoutUtils';
 import { FlexControls } from './layout/FlexControls';
 import { GridControls } from './layout/GridControls';
 
