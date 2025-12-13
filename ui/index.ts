@@ -39,3 +39,4 @@ export * from './sections/data-display/CountdownAndKbd';
 export * from './sections/data-display/StatsDisplay';
 export * from './sections/NavigationSection';
 export * from './sections/CompositeSection';
+export * from './sections/StatusSection';
