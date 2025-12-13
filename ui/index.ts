@@ -24,6 +24,7 @@ export * from './molecules/properties/SchemaEditorView';
 export * from './molecules/properties/RuntimeVariableEditorView';
 export * from './molecules/properties/ContentEditorView';
 export * from './molecules/properties/LogicEditorView';
+export * from './molecules/properties/InteractionEditorView';
 export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';
