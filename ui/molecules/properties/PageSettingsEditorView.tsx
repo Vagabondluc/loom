@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageSettings } from '../../../../types';
-import { Maximize, Columns, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 type Props = {
     pageSettings: PageSettings;
