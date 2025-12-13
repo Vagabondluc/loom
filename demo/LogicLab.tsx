@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Card, CardTitle, Button, Badge } from '../ui';
+import { Card, CardTitle, Button, Badge, EmptyStateView } from '../ui';
 import { useLogicStore } from '../stores/logicStore';
 import { LogicNode } from '../types';
 import { Play, RotateCcw, CheckCircle, Loader2, Info, Settings2 } from 'lucide-react';
@@ -13,7 +13,7 @@ export const LogicLab: React.FC = () => {
   // Default to first flow if none active, or the currently active one
   const displayFlow = activeFlowId ? flows.find(f => f.id === activeFlowId) : flows[0];
 
-  if (!displayFlow) return <div>No flows definition found.</div>;
+  if (!displayFlow) return <EmptyStateView message="No flows definition found." />;
 
   const selectedNode = selectedNodeId ? displayFlow.nodes.find(n => n.id === selectedNodeId) : null;
 

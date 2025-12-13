@@ -64,7 +64,7 @@ export const MarkdownTab: React.FC = () => {
         });
       }
 
-      // 4. Lists -> Individual Paragraphs with bullets (Simple mapping for now)
+      // 4. Lists -> Individual Paragraphs with bullets (basic mapping for now)
       else if (token.type === 'list') {
         token.items.forEach((item: any) => {
            blocks.push({
