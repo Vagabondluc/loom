@@ -238,6 +238,16 @@ Before merging:
 - [~] TS integrity sweep — editor TS checks pass for changed files; CI `tsc` will run on PR
 - [ ] Final validation checklist — pending: final CI and manual review
 
+#### UI Move Pass — Candidate List (Initial)
+
+- ThemePreview (demo/theme/ThemePreview.tsx) — Preview UI; candidate for `ui/` if reused.
+- ThemeControls (demo/theme/ThemeControls.tsx) — Control UI; candidate only if it is generic.
+- StoryPreview (demo/story/StoryPreview.tsx) — Might be demo-specific; leave unless reused.
+- StoryToolbar (demo/story/StoryToolbar.tsx) — Generic toolbar candidate for `ui/`.
+
+Recommendation: For each candidate, validate there are no editor-specific imports (builder store, demo-only utilities). If none, move to `ui/` and replace original with a shim re-export.
+
+
 Notes: The PR `refactor/extract-runtime-export-shims` contains many of these changes; CI shim purity passed while contract checks flag pre-existing documentation issues that will be remediated in a separate PR.
 
 - [ ] No empty legacy files exist
