@@ -1,6 +1,8 @@
 import React from 'react';
-import { ChevronDown, ChevronUp, Layout, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronUp, Layout } from 'lucide-react';
 import { clsx } from 'clsx';
+import { Badge } from '../atoms/Badge';
+import TemplateWizardEmptyStateView from './TemplateWizardEmptyStateView';
 
 type SectionDef = { id: string; desc?: string };
 
@@ -35,10 +37,10 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
                   onChange={(e) => onToggleSelect(section, e.target.checked)}
                 />
 
-                <div className="flex-1 cursor-pointer" onClick={() => isSelected && onToggleExpand(section)}>
+                  <div className="flex-1 cursor-pointer" onClick={() => isSelected && onToggleExpand(section)}>
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">{section}</span>
-                    {instructorTip && <span className="badge badge-ghost badge-xs font-normal opacity-70 hidden sm:inline-flex">Purpose</span>}
+                    {instructorTip && <Badge variant="ghost" size="xs" className="font-normal opacity-70 hidden sm:inline-flex">Purpose</Badge>}
                   </div>
                   {instructorTip && <p className="text-xs opacity-60 mt-0.5">{instructorTip}</p>}
                 </div>
@@ -65,10 +67,7 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
           );
         })
       ) : (
-        <div className="p-8 text-center opacity-50 border border-dashed border-base-300 rounded-lg">
-          <Sparkles className="w-6 h-6 mx-auto mb-2 opacity-50" />
-          No default sections for this archetype.
-        </div>
+        <TemplateWizardEmptyStateView message="No default sections for this archetype." />
       )}
     </div>
   );

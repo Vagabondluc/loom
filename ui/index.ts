@@ -42,6 +42,8 @@ export * from './molecules/TemplateWizardFooterView';
 export * from './molecules/TemplateWizardContextView';
 export * from './molecules/TemplateWizardErrorAlertView';
 export * from './molecules/TemplateWizardSectionConfigView';
+export * from './molecules/TemplateWizardEmptyStateView';
+export * from './molecules/TemplateWizardStepHeaderView';
 export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';

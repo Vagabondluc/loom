@@ -14,6 +14,7 @@ import TemplateWizardContentStrategyView from '../../ui/molecules/TemplateWizard
 import VisualStyleSelectorView from '../../ui/molecules/VisualStyleSelectorView';
 import TemplateWizardSectionsView from '../../ui/molecules/TemplateWizardSectionsView';
 import TemplateWizardFooterView from '../../ui/molecules/TemplateWizardFooterView';
+import TemplateWizardStepHeaderView from '../../ui/molecules/TemplateWizardStepHeaderView';
 import { clsx } from 'clsx';
 import TemplateWizardContextView from '../../ui/molecules/TemplateWizardContextView';
 import TemplateWizardErrorAlertView from '../../ui/molecules/TemplateWizardErrorAlertView';
@@ -246,10 +247,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
             
             {/* 1. Page Archetype */}
             <section>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">1</div>
-                    <h3 className="text-lg font-bold">Page Archetype</h3>
-                </div>
+                <TemplateWizardStepHeaderView index={1} title="Page Archetype" color="bg-primary/10" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {PAGE_TYPES.map(type => (
                         <PageTypeCardView key={type.id} id={type.id} desc={type.desc} selected={pageType === type.id} onSelect={handlePageTypeChange} />
@@ -259,10 +257,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
 
             {/* 2. Content Strategy */}
             <section>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-info/10 flex items-center justify-center text-info font-bold">2</div>
-                    <h3 className="text-lg font-bold">Content Strategy</h3>
-                </div>
+                <TemplateWizardStepHeaderView index={2} title="Content Strategy" color="bg-info/10 text-info" />
                 <TemplateWizardContentStrategyView
                     textMode={contentStrategy.textMode}
                     imageMode={contentStrategy.imageMode}
@@ -274,19 +269,13 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
 
             {/* 3. Visual Style */}
             <section>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold">3</div>
-                    <h3 className="text-lg font-bold">Visual Style</h3>
-                </div>
+                <TemplateWizardStepHeaderView index={3} title="Visual Style" color="bg-secondary/10 text-secondary" />
                 <VisualStyleSelectorView options={VISUAL_STYLES} selected={visualStyle} onSelect={setVisualStyle} />
             </section>
 
             {/* 4. Sections & Overrides */}
             <section>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold">4</div>
-                    <h3 className="text-lg font-bold">Structure & Overrides</h3>
-                </div>
+                <TemplateWizardStepHeaderView index={4} title="Structure & Overrides" color="bg-accent/10 text-accent" />
                 
                 <TemplateWizardSectionsView
                     pageType={pageType}
@@ -309,10 +298,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
 
             {/* 5. Context */}
             <section>
-                <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-base-300 flex items-center justify-center font-bold">5</div>
-                    <h3 className="text-lg font-bold">Additional Context</h3>
-                </div>
+                <TemplateWizardStepHeaderView index={5} title="Additional Context" color="bg-base-300 text-base-content" />
                 <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} />
             </section>
             <TemplateWizardErrorAlertView message={error} onClose={() => setError(null)} />
