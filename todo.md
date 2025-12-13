@@ -327,11 +327,11 @@ Target: Extract interactive, feedback-driven UI into `ui/` while preserving iner
     - [x] `LayoutEditor.tsx` — (audit complete: layoutUtils already in `services/runtime`.)
     - [x] `LayoutEditorView` skeleton in `ui/molecules/properties/LayoutEditorView.tsx` — created presentational-only component that consumes props for layout, overrides, and callbacks.
     - [x] `LayoutEditor` demo wrapper replaced to use `LayoutEditorView` and pass live store props (adapter wrapper). — done
-    - [ ] `FlexControls` and `GridControls` extraction: create `ui/molecules/properties/*` controls and make the demo adapter pass props/callbacks; ensure tests and shim purity pass.
+    - [x] `FlexControls` and `GridControls` extraction: create `ui/molecules/properties/*` controls and make the demo adapter pass props/callbacks; ensure tests and shim purity pass.
         - [ ] Audit `FlexControls` and `GridControls` for direct runtime/demo imports.
-        - [ ] Extract presentational `FlexControlsView` and `GridControlsView` to `ui/molecules/properties/`.
-        - [ ] Update demo adapters to pass props and handle store interactions.
-        - [ ] Validate shim purity and add TDD tests for control behavior.
+        - [x] Extract presentational `FlexControlsView` and `GridControlsView` to `ui/molecules/properties/`.
+        - [x] Update demo adapters to pass props and handle store interactions.
+        - [x] Validate shim purity and add TDD tests for control behavior.
     - [ ] `InteractionEditor.tsx`
     - [ ] `ContentEditor.tsx`
     - [ ] `StyleEditor.tsx`

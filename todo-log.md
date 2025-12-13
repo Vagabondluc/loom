@@ -55,4 +55,6 @@ Entries:
  - 2025-12-13: Ran `scripts/check-shim-purity.sh` after the change; checks passed. — tool-assisted
  - 2025-12-13: Completed adapter wrapper for `LayoutEditor` to use `LayoutEditorView`; added next task to extract `FlexControls` and `GridControls`. — tool-assisted
  - 2025-12-13: Added detailed subtasks for `FlexControls` and `GridControls` extraction: audit, presentational view, adapter updates, shim purity checks. — tool-assisted
+ - 2025-12-13: Implemented `FlexControlsView` and `GridControlsView` in `ui/molecules/properties` and updated demo adapters to use them; shim purity passed. — tool-assisted
  - 2025-12-13: Created PR #11: Phase 27: Extract LayoutEditorView (adapter/view split) targeting `refactor/extract-runtime-export-shims`. — tool-assisted
+ - 2025-12-13: Rebased `refactor/phase27-layout-editor` on remote, resolved unstaged changes and re-pushed branch. — tool-assisted

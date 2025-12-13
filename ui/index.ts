@@ -15,6 +15,8 @@ export * from './molecules/Navbar';
 export * from './molecules/Tabs';
 export * from './molecules/ToastContainer';
 export * from './molecules/properties/LayoutEditorView';
+export * from './molecules/properties/FlexControlsView';
+export * from './molecules/properties/GridControlsView';
 export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';
