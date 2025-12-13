@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loom</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Fira+Code:wght@400;700&family=Inter:wght@400;700;900&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Oswald:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    <!-- DaisyUI CSS (Must be loaded before Tailwind scans) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          screens: {
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+          },
+          extend: {
+            fontFamily: {
+              // Inject a CSS variable as the first font in the stack to allow runtime theming
+              sans: ['var(--font-theme)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['var(--font-theme)', 'ui-serif', 'Georgia', 'serif'],
+              mono: ['var(--font-theme)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Preline UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js"></script>
+
+    <!-- Import Map for Pure ESM -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@19.1.1",
+    "react-dom/client": "https://aistudiocdn.com/react-dom@19.1.1/client",
+    "react-dom": "https://aistudiocdn.com/react-dom@19.1.1",
+    "zustand": "https://esm.sh/zustand@4.5.2?external=react",
+    "zustand/middleware": "https://esm.sh/zustand@4.5.2/middleware?external=react",
+    "lucide-react": "https://esm.sh/lucide-react@0.378.0?external=react",
+    "clsx": "https://esm.sh/clsx@2.1.1",
+    "tailwind-merge": "https://esm.sh/tailwind-merge@2.3.0",
+    "zod": "https://esm.sh/zod@3.23.8",
+    "dexie": "https://esm.sh/dexie@4.0.4",
+    "marked": "https://esm.sh/marked@12.0.2",
+    "@google/genai": "https://esm.sh/@google/genai@0.14.0",
+    "zustand/": "https://esm.sh/zustand@4.5.2/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "path": "https://esm.sh/path@^0.12.7",
+    "fs": "https://esm.sh/fs@^0.0.1-security"
+  }
+}
+</script>
+    <style>
+      /* Minimal reset to prevent FOUC */
+      body {
+        opacity: 0;
+        animation: fadeIn 0.2s ease-in forwards;
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+      /* Default font variable fallback */
+      :root {
+        --font-theme: "Inter", ui-sans-serif, system-ui, sans-serif;
+      }
+    </style>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

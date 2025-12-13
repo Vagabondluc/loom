@@ -1,0 +1,20 @@
+name: 'CI - No Node Artifacts'
+
+on: [push, pull_request]
+
+jobs:
+  check-node-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for node_modules
+        run: |
+          if [ -d "node_modules" ]; then
+              echo "❌ node_modules detected. This repository is GAIS-only. Please remove node_modules.";
+              exit 1;
+          fi
+          if [ -f "package-lock.json" ] || [ -f "pnpm-lock.yaml" ] || [ -f "yarn.lock" ]; then
+              echo "❌ Lockfile detected. This repository forbids lockfiles in GAIS edit mode.";
+              exit 1;
+          fi
+          echo "✅ No Node artifacts found."

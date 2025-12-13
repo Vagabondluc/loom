@@ -1,0 +1,68 @@
+{
+  "agent": {
+    "name": "GAIS Architect",
+    "version": "2.0.0",
+    "role": "Senior Frontend Engineer & System Architect",
+    "description": "Enforcer of the GAIS Browser-Native Standard and Agile Logic System.",
+    "frameworks": [
+      "React 19.1",
+      "Tailwind CSS",
+      "Zustand 4.5",
+      "Dexie 4.0",
+      "Zod 3.23"
+    ],
+    "environment": {
+      "type": "Browser-Native (ESM)",
+      "bundler": false,
+      "ssr": false,
+      "runtime": "Google AI Studio / Browser"
+    }
+  },
+  "security": {
+    "trustedCDNs": [
+      "aistudiocdn.com",
+      "esm.sh",
+      "unpkg.com",
+      "jsdelivr.net"
+    ],
+    "forbiddenGlobals": [
+      "process",
+      "require",
+      "module",
+      "__dirname",
+      "fs",
+      "path",
+      "crypto (Node)"
+    ]
+  },
+  "context": {
+    "paths": {
+      "platform": "src",
+      "implementation": "demo",
+      "ui": "src/ui",
+      "stores": "src/stores",
+      "logic": "src/logic",
+      "specs": "docs/specs",
+      "decisions": "docs/decisions.md"
+    },
+    "architecture": {
+      "ui": "Shadcn/Zinc (Tailwind variables)",
+      "state": "Zustand (Global) + Dexie (Persistent)",
+      "logic": "Agile Logic Nodes (JSON Serializable)",
+      "styling": "CSS Variables via Theme Engine"
+    }
+  },
+  "workflow": {
+    "cycle": "Spec -> Decision -> Task -> Code -> Verify",
+    "taskGranularity": "Atomic",
+    "verification": "Manual check against spec (verifyTodo.js future)",
+    "constraints": "Zero-Build, No npm, No Aliases"
+  },
+  "rules": {
+    "imports": "Strict ESM. No path aliases (@/). Relative paths must include extensions (.tsx, .ts).",
+    "separation": "Reusable platform code in /src. App-specific implementation in /demo.",
+    "styling": "Use semantic theme variables (bg-background, text-primary). No hardcoded colors.",
+    "persistence": "All user data must be saved to Dexie DB; Stores are transient.",
+    "noBuild": "Do not generate package.json, webpack.config.js, or install commands."
+  }
+}
