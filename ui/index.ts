@@ -20,3 +20,4 @@ export * from './composites/Toolbar';
 export * from './ThemeControls';
 export * from './StoryToolbar';
 export * from './StorySidebar';
+export * from './StoryPreview';
