@@ -44,11 +44,7 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
       onResetLayoutOverrides={() => resetLayoutOverrides(node.id)}
       onUpdate={(u, s) => updateNodeLayout(node.id, u, { skipHistory: !!s })}
       onSnapshot={snapshot}
-      isOverridden={(k) => {
-        if (activeBreakpoint === 'mobile') return false;
-        const overrides = node.responsive?.[activeBreakpoint];
-        return overrides && overrides[k] !== undefined;
-      }}
+      isOverridden={isOverridden}
       OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <span className="w-1.5 h-1.5 rounded-full bg-primary ml-1.5 inline-block" title="Overridden in current view"></span> : null)}
     >
       {layout.mode === 'flex' && (
