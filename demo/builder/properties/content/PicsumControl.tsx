@@ -2,6 +2,7 @@
 import React from 'react';
 import { BuilderNode } from '../../../../types';
 import { Input, FormField, Button, Checkbox } from '../../../../ui';
+import { PicsumControlView } from '../../../../ui/molecules/properties/content/PicsumControlView';
 import { Image as ImageIcon, RefreshCw } from 'lucide-react';
 
 interface PicsumControlProps {
@@ -31,7 +32,30 @@ export const PicsumControl: React.FC<PicsumControlProps> = ({ node, updateNodeDa
   };
 
   return (
-    <div className="space-y-3 bg-base-100 p-3 rounded-lg border border-base-300">
+    <PicsumControlView
+      config={node.data.picsumConfig || { width: 400, height: 300, seed: Math.random().toString(36).substring(7), grayscale: false, blur: 0 }}
+      onUpdate={(u) => {
+        const newConfig = { ...node.data.picsumConfig, ...u };
+        const { width, height, seed, grayscale, blur } = newConfig;
+        let url = `https://picsum.photos/seed/${seed}/${width}/${height}`;
+        const params = [] as string[];
+        if (grayscale) params.push('grayscale');
+        if (blur > 0) params.push(`blur=${blur}`);
+        if (params.length > 0) url += `?${params.join('&')}`;
+        updateNodeData(node.id, { picsumConfig: newConfig, props: { ...node.data.props, src: url } });
+      }}
+      onRandomize={() => {
+        const seed = Math.random().toString(36).substring(7);
+        const newConfig = { ...node.data.picsumConfig, seed };
+        const { width, height, grayscale, blur } = newConfig;
+        let url = `https://picsum.photos/seed/${seed}/${width}/${height}`;
+        const params = [] as string[];
+        if (grayscale) params.push('grayscale');
+        if (blur > 0) params.push(`blur=${blur}`);
+        if (params.length > 0) url += `?${params.join('&')}`;
+        updateNodeData(node.id, { picsumConfig: newConfig, props: { ...node.data.props, src: url } });
+      }}
+    >
        <div className="flex items-center gap-2 mb-2 text-xs font-bold opacity-70">
           <ImageIcon className="w-3 h-3" /> Picsum Config
        </div>
@@ -79,14 +103,7 @@ export const PicsumControl: React.FC<PicsumControlProps> = ({ node, updateNodeDa
           />
        </div>
 
-       <Button 
-         size="xs" 
-         variant="neutral" 
-         className="w-full gap-2"
-         onClick={() => updatePicsum({ seed: Math.random().toString(36).substring(7) })}
-       >
-         <RefreshCw className="w-3 h-3" /> Randomize Image
-       </Button>
-    </div>
+      </PicsumControlView>
+    
   );
 };
