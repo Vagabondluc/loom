@@ -4,6 +4,7 @@ import { useBuilderStore } from './store';
 import { Monitor, Tablet, Smartphone, RotateCw } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Breakpoint } from '../../types';
+import { ViewportControlsView } from '../..//ui/molecules/ViewportControlsView';
 
 export const ViewportControls: React.FC = () => {
   const activeBreakpoint = useBuilderStore(s => s.activeBreakpoint);
@@ -18,35 +19,11 @@ export const ViewportControls: React.FC = () => {
   ];
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="join bg-base-200 p-1 rounded-lg">
-        {views.map(view => (
-          <button
-            key={view.id}
-            className={clsx(
-              "btn btn-sm join-item border-none",
-              activeBreakpoint === view.id ? "btn-active btn-neutral" : "btn-ghost"
-            )}
-            onClick={() => setBreakpoint(view.id)}
-            title={view.label}
-          >
-            <view.icon className="w-4 h-4" />
-          </button>
-        ))}
-      </div>
-
-      {activeBreakpoint !== 'desktop' && (
-        <button
-          className={clsx(
-            "btn btn-sm btn-ghost btn-square transition-all",
-            orientation === 'landscape' && "bg-primary/10 text-primary rotate-90"
-          )}
-          onClick={toggleOrientation}
-          title={`Toggle Orientation (${orientation})`}
-        >
-          <RotateCw className="w-4 h-4" />
-        </button>
-      )}
-    </div>
+    <ViewportControlsView
+      activeBreakpoint={activeBreakpoint}
+      onSetBreakpoint={setBreakpoint}
+      orientation={orientation}
+      onToggleOrientation={toggleOrientation}
+    />
   );
 };
