@@ -350,6 +350,8 @@ Target: Extract interactive, feedback-driven UI into `ui/` while preserving iner
 
 Notes: Continuing sweep for small card patterns and other presentational extractions (in-progress). Run `scripts/check-shim-purity.sh` after each extraction and ensure `get_errors` fixups for typings are addressed in follow-up dev-dependency updates.
 
+- 2025-12-13: **ComponentCardView:** Extracted `ui/molecules/ComponentCardView.tsx` and replaced inline component cards in `demo/builder/palette/ComponentsTab.tsx`. — tool-assisted
+
 ---
 
 #### Phase 27 Execution Backlog — Modals/Toasts/Preline (Priority 2)
