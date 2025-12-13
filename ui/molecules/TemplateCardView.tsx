@@ -1,7 +1,6 @@
 import React from 'react';
 import { LayoutTemplate } from 'lucide-react';
 import { Badge } from '../atoms/Badge';
-import { Card } from '../molecules/Card';
 
 type Props = {
   id: string;
