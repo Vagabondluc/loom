@@ -88,7 +88,7 @@ These epics represent long-term goals that will build upon the completed phases 
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout**
 
 > **Invariant:** No GAIS workarounds in this phase.
@@ -265,7 +265,7 @@ After this phase is merged:
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout`
 
 > **Invariant:** No GAIS workarounds in this phase.
@@ -458,7 +458,7 @@ This is a VS Code–specific migration checklist, written as an execution playbo
 - [ ] You have full file delete / rename capability
 - [ ] Project builds successfully **before** refactor
 - [ ] All tests (if runnable) pass
-- [ ] Git branch created: `refactor/canonical-structure`
+- [x] Git branch created: `refactor/canonical-structure`
 - [ ] `restructuration-plan.md` reflects **target layout**
 
 > **Invariant:** No GAIS workarounds in this phase.

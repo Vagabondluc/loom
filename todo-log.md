@@ -10,4 +10,5 @@ Entries:
 - 2025-12-13: Added CI workflow to block node artifacts. — Copilot
 - 2025-12-13: Git not initialized; could not create branch `refactor/canonical-structure`. — Copilot
 - 2025-12-13: Added explicit agent rule to `agent.md` forbidding npm/yarn/pnpm suggestions. — Copilot
+- 2025-12-13: Initialized git, created branch `refactor/canonical-structure`, and committed GAIS guard files. — Copilot
 
