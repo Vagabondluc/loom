@@ -24,3 +24,5 @@ Notes:
 Next steps:
 - If CI finds errors, patch minimal import/type issues caused by extraction only.
 - Once CI passes, merge and continue additional extraction loops if required.
+
+- Note: This PR intentionally limits scope to code extraction only; CI failures are pre-existing documentation contract issues and will be remediated in a separate docs-only PR.
