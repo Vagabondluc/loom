@@ -4,7 +4,7 @@ import { usePaletteInteractions } from './usePaletteInteractions';
 import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
-import { Badge } from '../../../ui';
+import { Badge, EmptyStateView } from '../../../ui';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
 interface ParsedBlock {
@@ -149,9 +149,7 @@ export const MarkdownTab: React.FC = () => {
               );
           })}
           {parsedBlocks.length === 0 && (
-            <div className="p-4 text-center opacity-40 text-xs border border-dashed border-base-content/20 rounded">
-              No blocks generated yet.
-            </div>
+            <EmptyStateView message="No blocks generated yet." className="text-xs" />
           )}
         </div>
       </div>

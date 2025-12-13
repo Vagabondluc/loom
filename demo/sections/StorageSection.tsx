@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, CardTitle, Button, CodeLabel, Badge } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge, EmptyStateView } from '../../ui';
 import { useBuilderStore } from '../builder/store';
 import { Save, Trash2, FolderOpen, Database } from 'lucide-react';
 
@@ -40,12 +40,9 @@ export const StorageSection: React.FC = () => {
         </CardTitle>
         
         <div className="overflow-x-auto mt-4">
-          {savedProjects.length === 0 ? (
-             <div className="text-center py-8 opacity-50 bg-base-200 rounded-lg border border-dashed border-base-content/20">
-                <p>No saved projects found in local storage.</p>
-                <p className="text-xs mt-2">Click "Save Snapshot" to create a test record.</p>
-             </div>
-          ) : (
+            {savedProjects.length === 0 ? (
+                   <EmptyStateView message="No saved projects found in local storage." subMessage={'Click "Save Snapshot" to create a test record.'} />
+                 ) : (
             <table className="table table-zebra w-full">
               <thead>
                 <tr>
