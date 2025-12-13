@@ -24,3 +24,4 @@ export * from './StoryPreview';
 export * from './StoryEditor';
 export * from './StoryLogicView';
 export * from './PrelineStaticCard';
+export * from './PrelineComponentPreviews';
