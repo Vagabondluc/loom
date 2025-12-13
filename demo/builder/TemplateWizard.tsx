@@ -15,6 +15,9 @@ import VisualStyleSelectorView from '../../ui/molecules/VisualStyleSelectorView'
 import TemplateWizardSectionsView from '../../ui/molecules/TemplateWizardSectionsView';
 import TemplateWizardFooterView from '../../ui/molecules/TemplateWizardFooterView';
 import { clsx } from 'clsx';
+import TemplateWizardContextView from '../../ui/molecules/TemplateWizardContextView';
+import TemplateWizardErrorAlertView from '../../ui/molecules/TemplateWizardErrorAlertView';
+import TemplateWizardSectionConfigView from '../../ui/molecules/TemplateWizardSectionConfigView';
 
 interface TemplateWizardProps {
   open: boolean;
@@ -266,56 +269,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     onChangeTextMode={(m) => setContentStrategy(s => ({ ...s, textMode: m as any }))}
                     onChangeImageMode={(m) => setContentStrategy(s => ({ ...s, imageMode: m as any }))}
                 />
-                {expandedSection && selectedSections[expandedSection] && (
-                    <div className="bg-base-200/50 p-4 border-t border-base-200 rounded-b-xl animate-in slide-in-from-top-1">
-                        <div className="text-[10px] font-bold uppercase opacity-40 mb-3 tracking-wider flex items-center gap-2">
-                            <Layout className="w-3 h-3" /> Section Configuration
-                        </div>
-                        {expandedSection === 'Hero' && (
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="form-control">
-                                    <label className="label text-xs py-1">Layout</label>
-                                    <select className="select select-bordered select-xs" value={sectionConfig[expandedSection]?.layout || 'split'} onChange={(e) => updateSectionConfig(expandedSection, 'layout', e.target.value)}>
-                                        <option value="split">Split (Left/Right)</option>
-                                        <option value="centered">Centered</option>
-                                    </select>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label text-xs py-1">Media</label>
-                                    <select className="select select-bordered select-xs" value={sectionConfig[expandedSection]?.image || 'default'} onChange={(e) => updateSectionConfig(expandedSection, 'image', e.target.value)}>
-                                        <option value="default">Image</option>
-                                        <option value="none">None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        )}
-
-                        {(expandedSection === 'Feature Grid' || expandedSection === 'Features') && (
-                            <div className="form-control">
-                                <label className="label text-xs py-1">Count</label>
-                                <div className="join">
-                                    {[3, 4, 6].map(n => (
-                                        <button key={n} className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.count === n ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'count', n)}>{n}</button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {expandedSection === 'Footer' && (
-                            <div className="form-control">
-                                <label className="label text-xs py-1">Complexity</label>
-                                <div className="join">
-                                    <button className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.style === 'simple' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'style', 'simple')}>Simple</button>
-                                    <button className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.style === 'complex' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'style', 'complex')}>Multi-Column</button>
-                                </div>
-                            </div>
-                        )}
-
-                        {expandedSection !== 'Hero' && expandedSection !== 'Feature Grid' && expandedSection !== 'Features' && expandedSection !== 'Footer' && (
-                            <div className="text-xs opacity-50 italic">No specific overrides available for this section.</div>
-                        )}
-                    </div>
-                )}
+                
             </section>
 
             {/* 3. Visual Style */}
@@ -347,7 +301,9 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     sectionConfig={sectionConfig}
                     sectionInstructions={SECTION_INSTRUCTION}
                 />
-                
+                {expandedSection && selectedSections[expandedSection] && (
+                    <TemplateWizardSectionConfigView section={expandedSection} config={sectionConfig[expandedSection]} onChange={(key, val) => updateSectionConfig(expandedSection, key, val)} />
+                )}
                 </div>
             </section>
 
@@ -357,20 +313,9 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     <div className="w-8 h-8 rounded-full bg-base-300 flex items-center justify-center font-bold">5</div>
                     <h3 className="text-lg font-bold">Additional Context</h3>
                 </div>
-                <textarea 
-                    className="textarea textarea-bordered w-full h-24"
-                    placeholder="e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                />
+                <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} />
             </section>
-
-            {error && (
-                <div className="alert alert-error shadow-lg">
-                    <AlertCircle className="w-6 h-6" />
-                    <span>{error}</span>
-                </div>
-            )}
+            <TemplateWizardErrorAlertView message={error} onClose={() => setError(null)} />
 
          </div>
       </div>
