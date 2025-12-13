@@ -7,7 +7,7 @@ import { buildTemplateWizardPrompt, ContentStrategy, SectionConfig } from '../..
 import { COMPONENT_REGISTRY } from './registries';
 import { ai } from '../../services/ai';
 import { Type as GenAiType } from '@google/genai';
-import { FileText, AlignLeft, Heading, Ban, Image as ImageIcon, Box, Link as LinkIcon, Check, AlertCircle, Sparkles, ChevronDown, ChevronUp, Layout } from 'lucide-react';
+import { FileText, AlignLeft, Heading, Ban, Image as ImageIcon, Box, Link as LinkIcon, Check, Sparkles, ChevronDown, ChevronUp, Layout } from 'lucide-react';
 import TemplateWizardHeaderView from '../../ui/molecules/TemplateWizardHeaderView';
 import PageTypeCardView from '../../ui/molecules/PageTypeCardView';
 import TemplateWizardContentStrategyView from '../../ui/molecules/TemplateWizardContentStrategyView';
