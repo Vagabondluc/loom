@@ -3,7 +3,6 @@ import React from 'react';
 import { useBuilderStore } from '../store';
 import { LayoutConfig, Breakpoint, BuilderNode } from '../../../types';
 import { LayoutEditorView } from '../../../ui/molecules/properties/LayoutEditorView';
-import { LayoutModeSelector } from './layout/LayoutModeSelector';
 import { resolveEffectiveLayout } from '../../../services/runtime/layoutUtils';
 import { FlexControls } from './layout/FlexControls';
 import { GridControls } from './layout/GridControls';
