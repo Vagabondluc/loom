@@ -1,5 +1,3 @@
-import { BuilderNode } from '../../types';
-
 export interface Envelope {
   top: number;
   left: number;

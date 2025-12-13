@@ -300,6 +300,108 @@ After this phase is merged:
 
 ---
 
+### 👋 PHASE 27: Feedback & Interactive UI Extraction (Pending)
+Target: Extract interactive, feedback-driven UI into `ui/` while preserving inert editor behavior and isolating runtime logic into `services/` or `stores/`.
+
+- Scope Note: This phase contains higher-risk items that commonly include runtime logic (e.g., toasts, modals, accordions). For each candidate, split logic out to `services/` or `stores` and keep presentation-only code in `ui/`.
+
+#### Candidate Components
+- [ ] Inspector / BuilderProperties (`demo/builder/BuilderProperties.tsx`, `demo/builder/properties/*`) — Move visual-only parts to `ui/molecules/`; keep stateful logic in `stores/`.
+- [ ] Toast Notifications (`ui/ToastContainer.tsx` / `stores/toastStore.ts`) — Ensure `toastStore` remains in `stores/` and the UI component moves to `ui/molecules`.
+- [ ] Modal & Confirmations (`ui/Modal.tsx`, Preline modals) — Extract static markup; add `inert` prop for editor mode; runtime behavior lives in `services/preline-adapter`.
+- [ ] Preline Playground interactive elements (`demo/sections/PrelinePlayground.tsx`) — Move static examples to `ui/sections/PrelinePlayground`, split runtime behavior to `services/preline/`.
+- [ ] Forms & Validation (`ui/Input.tsx`, `ui/TextArea.tsx`, FormField) — Extract `FormField` and `Input` to `ui/atoms` and `ui/molecules`, keep schema logic & Zod helpers in `services/form`.
+- [ ] Step Inspector / LogicLab panels (`demo/LogicLab.tsx`) — move presentation to `ui/molecules` and logic to `services/` or `stores/`.
+- [ ] Runtime Workbench panels that illustrate behavior (live examples) — move static visual cases to `ui/`; keep interactive behaviors in `services` only.
+
+---
+
+#### Phase 27 Execution Backlog — Property Editors (Priority 1)
+- For each property editor in `demo/builder/properties/`, perform the following substeps:
+    - [ ] Audit imports: list external runtime imports vs demo-only imports.
+    - [ ] Extract: Move presentational markup and style into `ui/molecules/properties/` as `*EditorView.tsx`.
+    - [ ] Adapter Wrapper: Keep a small `demo/builder/properties/*` file that reads from `useBuilderStore` and passes props to `ui/` component.
+    - [ ] Shim Re-export: Replace `demo` property file with shim that re-exports adapter wrapper if necessary.
+    - [ ] Purity & TS: Run `scripts/check-shim-purity.sh` and TypeScript checks.
+- Items:
+    - [x] `LayoutEditor.tsx` — (audit complete: layoutUtils already in `services/runtime`.)
+    - [x] `LayoutEditorView` skeleton in `ui/molecules/properties/LayoutEditorView.tsx` — created presentational-only component that consumes props for layout, overrides, and callbacks.
+    - [x] `LayoutEditor` demo wrapper replaced to use `LayoutEditorView` and pass live store props (adapter wrapper). — done
+    - [ ] `FlexControls` and `GridControls` extraction: create `ui/molecules/properties/*` controls and make the demo adapter pass props/callbacks; ensure tests and shim purity pass.
+        - [ ] Audit `FlexControls` and `GridControls` for direct runtime/demo imports.
+        - [ ] Extract presentational `FlexControlsView` and `GridControlsView` to `ui/molecules/properties/`.
+        - [ ] Update demo adapters to pass props and handle store interactions.
+        - [ ] Validate shim purity and add TDD tests for control behavior.
+    - [ ] `InteractionEditor.tsx`
+    - [ ] `ContentEditor.tsx`
+    - [ ] `StyleEditor.tsx`
+    - [ ] `LogicEditor.tsx`
+    - [ ] `SchemaEditor.tsx`
+    - [ ] `RuntimeVariableEditor.tsx`
+    - [ ] `PageSettingsEditor.tsx`
+    - [ ] `DocumentEditor.tsx`
+
+---
+
+#### Phase 27 Execution Backlog — Modals/Toasts/Preline (Priority 2)
+- Items:
+    - [ ] `Modal.tsx` and demo preline modals — extract UI → `ui/` and runtime init to `services/preline`.
+    - [ ] `ToastContainer.tsx` — move UI; keep `toastStore` in `stores/toastStore.ts`.
+    - [ ] `PrelinePlayground.tsx` — convert to static examples and move to `ui/sections/PrelinePlayground`.
+
+---
+
+#### Phase 27 Execution Backlog — Forms & Validation (Priority 3)
+- Items:
+    - [ ] `Input.tsx`, `TextArea.tsx`, and `FormField` — extract to `ui/atoms` & `ui/molecules` and keep validation in `services/form`.
+    - [ ] Form-binding utils (`Zod` helpers) — ensure these live in `services/form` or `utils` and are not demo-specific.
+
+---
+
+#### Phase 27 Execution Backlog — Step Inspector / LogicLab (Priority 4)
+- Items:
+    - [ ] `LogicLab.tsx` panels: Extract UI and components into `ui/molecules/logic/` and keep store/service integration within `demo` wrappers or `services/`.
+    - [ ] `StepInspector` — ensure inspector visual components are in `ui/` and logic in `services/`.
+
+---
+
+#### Phase 27 Orchestration & Acceptance
+- [ ] For each extracted file: update `ui/index.ts` exports and add a short entry to `docs/tdd-*` describing the inert vs runtime behavior.
+- [ ] Run `scripts/check-shim-purity.sh` after each round of extractions and ensure green before committing.
+- [ ] Create branch `refactor/phase27-feedback` and perform extracts in small PRs (one editor or component per PR).
+
+
+#### Per-Component Checklist
+- [ ] Candidate Audit: Ensure the file doesn't import `demo/` or runtime-only artifacts. If it does, list which lines require refactor.
+- [ ] Split: If runtime logic exists (API calls, side effects, Zustand stores), extract to `services/` or `stores/` and import them from there.
+- [ ] UI Extraction: Move the presentational TSX to `ui/atoms`/`molecules`/`sections` as appropriate. Add or reuse `FormField` abstraction when relevant.
+- [ ] Inert Prop: Add `inert` or `editorDisabled` prop so components render non-interactive markup in the Builder without wiring runtime behaviors.
+- [ ] Shim Re-export: Replace original file in `demo/` with a shim re-exporting the new `ui/` component.
+- [ ] Validation: Run `scripts/check-shim-purity.sh` after each extraction and verify output.
+- [ ] TypeScript sweep: Run an editor TS check and resolve any new errors locally.
+- [ ] Final re-export: Add a canonical export to `ui/index.ts` if this component is intended to be reused across the runtime.
+
+#### Safety & TDD
+- [ ] For each extracted component, write or extend a TDD pack in `docs/tdd-*` that captures the UX contract for inert vs runtime behavior (e.g., `tdd-builder-safety`, `tdd-low-code-superpowers`).
+- [ ] Maintain backward-compatible API; prefer props over context where possible to reduce coupling.
+
+#### Acceptance Criteria
+- [ ] No runtime code imports from `demo/` remain outside `demo/`.
+- [ ] Each shim re-export passes `scripts/check-shim-purity.sh`.
+- [ ] `ui/` components are pure presentation, with runtime responsibilities in `services/` or `stores/`.
+- [ ] No changes to `docs/` or governance in this PR — those happen in a follow-up docs remediation PR.
+
+#### Notes & Risk
+- Some Preline components are expected to require a `services/preline` adapter due to internal initialization; plan to extract adapters only in a follow-up extraction if it proves risky.
+- If a component is deeply coupled to runtime state, prefer creating a facade in `ui/` that accepts props and defers to a `services/` adapter for preview-only wiring.
+
+---
+
+### Safety Reminder: Buildless Development
+- Do not run `npm run build` during the active refactor phase. This repo is currently in GAIS dev mode and should remain buildless until architecture stabilization. See `agent.md` for the canonical rule.
+
+---
+
 ### 0. Preconditions (Do Not Skip)
 
 - [ ] You are **not** in GAIS
