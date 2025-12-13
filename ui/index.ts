@@ -17,3 +17,4 @@ export * from './molecules/ToastContainer';
 export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';
+export * from './ThemeControls';
