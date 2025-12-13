@@ -20,6 +20,7 @@ Entries:
 - 2025-12-13: Replaced local `resolveEffectiveLayout` in `LayoutEditor` with canonical `services/runtime/layoutUtils` via shim. — tool-assisted
 - 2025-12-13: Ran TypeScript validation via workspace checks; no type errors found (Node not present to run `tsc`). — tool-assisted
 - 2025-12-13: Ran shim purity & contract checks; shim purity passed; contract checks show pre-existing doc issues. — tool-assisted
+- 2025-12-13: Created branch `refactor/extract-runtime-export-shims` and committed extraction changes (08d0af62, 94dfd7a). — tool-assisted
 - 2025-12-13: Created canonical target folders and placeholder index.ts files for `stores`, `services`, `utils`, and `config`. — tool-assisted
 
 - 2025-12-13: Normalized attributions in todo-log.md to '— tool-assisted'. — tool-assisted
