@@ -19,3 +19,4 @@ Entries:
 - 2025-12-13: Normalized attributions in todo-log.md to '— tool-assisted'. — tool-assisted
 
 - 2025-12-13: Updated services/promptBuilder to accept `availableComponents` param and removed direct demo import; updated TemplateWizard to pass the registry keys. — tool-assisted
+- 2025-12-13: Verified no files in `services/`, `stores/`, `utils/`, `ui/`, or `config/` import from `demo/`. — tool-assisted
