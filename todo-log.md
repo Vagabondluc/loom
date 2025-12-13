@@ -41,3 +41,4 @@ Entries:
  - 2025-12-12: Added `scripts/check-shim-purity.sh` and CI enforcement job to `.github/workflows/ci-enforce.yml` to enforce runtime shim purity; integrated into `scripts/check-contract.sh`. — tool-assisted
  - 2025-12-13: Extracted `CompositeSection` to `ui/sections/CompositeSection` and replaced `demo/` shim. — tool-assisted
  - 2025-12-13: Extracted `StatusSection` to `ui/sections/StatusSection` and replaced `demo/` shim. — tool-assisted
+ - 2025-12-13: Extracted `TablesSection` to `ui/sections/TablesSection` and replaced `demo/` shim. — tool-assisted

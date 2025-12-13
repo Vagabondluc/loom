@@ -41,3 +41,4 @@ export * from './sections/NavigationSection';
 export * from './sections/CompositeSection';
 export * from './sections/StatusSection';
 export * from './sections/TablesSection';
+export * from './sections/CarouselSection';

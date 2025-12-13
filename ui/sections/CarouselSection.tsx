@@ -1,9 +1,26 @@
-export { CarouselSection } from '../../ui/sections/CarouselSection';
+import React, { useRef } from 'react';
+import { Card, CardTitle, CodeLabel } from '../index';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+export const CarouselSection: React.FC = () => {
+  const snapScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollSnap = (direction: 'left' | 'right') => {
+    if (snapScrollRef.current) {
+      const container = snapScrollRef.current;
+      const scrollAmount = container.clientWidth * 0.75; 
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <section id="carousel" className="space-y-6 scroll-mt-24">
       <div className="prose max-w-none">
         <h2 className="text-3xl font-bold border-b pb-2">Carousel</h2>
-        <p className="text-base-content/70">
-          Scrollable areas for displaying media or content series.
-        </p>
+        <p className="text-base-content/70">Scrollable areas for displaying media or content series.</p>
       </div>
 
       <Card bordered>
@@ -19,8 +36,6 @@ export { CarouselSection } from '../../ui/sections/CarouselSection';
                </div>
             ))}
           </div>
-          
-          {/* Scroll Controls - Enhanced for better UX/Touch */}
           <div className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none">
             <button 
               onClick={() => scrollSnap('left')}
@@ -70,3 +85,5 @@ export { CarouselSection } from '../../ui/sections/CarouselSection';
         </Card>
       </div>
     </section>
+  );
+};
