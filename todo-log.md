@@ -13,6 +13,8 @@ Entries:
 - 2025-12-13: Initialized git, created branch `refactor/canonical-structure`, and committed GAIS guard files. — tool-assisted
 - 2025-12-13: Committed additional updates to `todo.md`, `agent.md`, and `todo-log.md` on branch `refactor/canonical-structure`. — tool-assisted
 - 2025-12-13: Applied `todo.md` to branch `refactor/canonical-structure` and verified changes are committed. — tool-assisted
+- 2025-12-13: Identified canonical runtime roots: `ui/`, `stores/`, `services/`, `utils/`, `config/`. — tool-assisted
+- 2025-12-13: Created canonical target folders and placeholder index.ts files for `stores`, `services`, `utils`, and `config`. — tool-assisted
 
 
 - 2025-12-13: Normalized attributions in todo-log.md to '— tool-assisted'. — tool-assisted

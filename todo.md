@@ -100,18 +100,18 @@ These epics represent long-term goals that will build upon the completed phases 
 
 ### 1. Freeze Authority & Scope
 
-- [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
-- [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
-- [ ] Confirm docs are not moving yet
+- [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
+- [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
+- [x] Confirm docs are not moving yet
 
 ---
 
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 
@@ -274,18 +274,18 @@ After this phase is merged:
 
 ### 1. Freeze Authority & Scope
 
-- [ ] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
-- [ ] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
-- [ ] Confirm docs are not moving yet
+- [x] Identify canonical runtime roots (decide once): `ui/`, `stores/`, `services/`, `utils/`, `config/`
+- [x] Confirm `demo` is a host app (runtime **must not import** from `demo/`)
+- [x] Confirm docs are not moving yet
 
 ---
 
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 
@@ -476,9 +476,9 @@ This is a VS Code–specific migration checklist, written as an execution playbo
 ### 2. Create Target Folders First
 
 Before moving any files:
-- [ ] Create all target directories (even empty)
-- [ ] Add placeholder `index.ts` barrels where appropriate
-- [ ] Do **not** add exports yet
+- [x] Create all target directories (even empty)
+- [x] Add placeholder `index.ts` barrels where appropriate
+- [x] Do **not** add exports yet
 
 This avoids circular refactors.
 
