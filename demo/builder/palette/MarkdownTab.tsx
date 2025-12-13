@@ -4,7 +4,7 @@ import { usePaletteInteractions } from './usePaletteInteractions';
 import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
-import { Badge, EmptyStateView, PanelHeaderView } from '../../../ui';
+import { EmptyStateView, PanelHeaderView } from '../../../ui';
 import { DraggableBlockView } from '../../../ui/molecules/DraggableBlockView';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
