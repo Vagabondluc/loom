@@ -7,6 +7,7 @@ import { LoremControl } from './content/LoremControl';
 import { PicsumControl } from './content/PicsumControl';
 import { IconControl } from './content/IconControl';
 import { ImageControl } from './content/ImageControl';
+import { ContentEditorView } from '../../../ui/molecules/properties/ContentEditorView';
 
 interface ContentEditorProps {
   node: BuilderNode;
@@ -17,9 +18,11 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ node }) => {
   const snapshot = useBuilderStore(s => s.snapshot);
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-xs font-bold uppercase tracking-wider opacity-50">Content</h3>
-      
+    <ContentEditorView
+      node={node}
+      onChangeLabel={(v) => updateNodeData(node.id, { label: v }, { skipHistory: true })}
+      onSnapshot={() => snapshot()}
+    >
       {/* Lorem Generator */}
       {node.type === 'lorem' && (
         <LoremControl node={node} updateNodeData={updateNodeData} />
@@ -30,39 +33,27 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ node }) => {
         <PicsumControl node={node} updateNodeData={updateNodeData} snapshot={snapshot} />
       )}
 
-      {/* Generic Label */}
-      {node.type !== 'image' && node.type !== 'icon' && node.type !== 'markdown' && node.type !== 'lorem' && node.type !== 'picsum' && (
-          <FormField label="Label / Text">
-            <TextArea 
-              className="min-h-[4rem]"
-              value={node.data.label || ''} 
-              onFocus={() => snapshot()}
-              onChange={(e) => updateNodeData(node.id, { label: e.target.value }, { skipHistory: true })}
-            />
-          </FormField>
-      )}
-
       {/* Generic Image */}
       {(node.type === 'image' || node.type === 'picsum') && (
-         <ImageControl node={node} updateNodeData={updateNodeData} snapshot={snapshot} />
+        <ImageControl node={node} updateNodeData={updateNodeData} snapshot={snapshot} />
       )}
 
       {/* Icon Config */}
       {node.type === 'icon' && (
-         <IconControl node={node} updateNodeData={updateNodeData} snapshot={snapshot} />
+        <IconControl node={node} updateNodeData={updateNodeData} snapshot={snapshot} />
       )}
 
       {/* Tab Config */}
       {node.type === 'tab' && (
-          <FormField label="Aria Label">
-            <Input 
-              size="sm"
-              value={node.data.props?.ariaLabel || ''} 
-              onFocus={() => snapshot()}
-              onChange={(e) => updateNodeData(node.id, { props: { ...node.data.props, ariaLabel: e.target.value } }, { skipHistory: true })}
-            />
-          </FormField>
+        <FormField label="Aria Label">
+          <Input
+            size="sm"
+            value={node.data.props?.ariaLabel || ''}
+            onFocus={() => snapshot()}
+            onChange={(e) => updateNodeData(node.id, { props: { ...node.data.props, ariaLabel: e.target.value } }, { skipHistory: true })}
+          />
+        </FormField>
       )}
-    </div>
+    </ContentEditorView>
   );
 };

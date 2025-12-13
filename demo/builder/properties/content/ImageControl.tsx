@@ -2,6 +2,7 @@
 import React from 'react';
 import { BuilderNode } from '../../../../types';
 import { Input, FormField } from '../../../../ui';
+import { ImageControlView } from '../../../../ui/molecules/properties/content/ImageControlView';
 
 interface ImageControlProps {
   node: BuilderNode;
@@ -11,23 +12,11 @@ interface ImageControlProps {
 
 export const ImageControl: React.FC<ImageControlProps> = ({ node, updateNodeData, snapshot }) => {
   return (
-     <div className="space-y-2">
-        <FormField label="Image URL">
-          <Input 
-            size="sm"
-            value={node.data.props?.src || ''} 
-            onFocus={() => snapshot()}
-            onChange={(e) => updateNodeData(node.id, { props: { ...node.data.props, src: e.target.value } }, { skipHistory: true })}
-          />
-        </FormField>
-        <FormField label="Alt Text">
-          <Input 
-            size="sm"
-            value={node.data.props?.alt || ''} 
-            onFocus={() => snapshot()}
-            onChange={(e) => updateNodeData(node.id, { props: { ...node.data.props, alt: e.target.value } }, { skipHistory: true })}
-          />
-        </FormField>
-     </div>
+    <ImageControlView
+      src={node.data.props?.src || ''}
+      alt={node.data.props?.alt || ''}
+      onUpdateSrc={(s) => updateNodeData(node.id, { props: { ...node.data.props, src: s } }, { skipHistory: true })}
+      onUpdateAlt={(a) => updateNodeData(node.id, { props: { ...node.data.props, alt: a } }, { skipHistory: true })}
+    />
   );
 };

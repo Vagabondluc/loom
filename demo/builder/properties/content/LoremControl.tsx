@@ -2,6 +2,7 @@
 import React from 'react';
 import { BuilderNode } from '../../../../types';
 import { Button } from '../../../../ui';
+import { LoremControlView } from '../../../../ui/molecules/properties/content/LoremControlView';
 import { Wand2, RefreshCw } from 'lucide-react';
 import { generateLorem } from '../../utils/lorem';
 
@@ -11,36 +12,12 @@ interface LoremControlProps {
 }
 
 export const LoremControl: React.FC<LoremControlProps> = ({ node, updateNodeData }) => {
+  const mode = node.data.loremConfig?.mode || 'medium';
   return (
-    <div className="space-y-3 bg-base-100 p-3 rounded-lg border border-base-300">
-       <div className="flex items-center gap-2 mb-2 text-xs font-bold opacity-70">
-          <Wand2 className="w-3 h-3" /> Lorem Generator
-       </div>
-       
-       <div className="join w-full">
-          {(['short', 'medium', 'long'] as const).map(mode => (
-            <button 
-              key={mode}
-              className={`join-item btn btn-xs flex-1 ${node.data.loremConfig?.mode === mode ? 'btn-active' : ''}`}
-              onClick={() => {
-                updateNodeData(node.id, { 
-                  label: generateLorem(mode),
-                  loremConfig: { mode }
-                });
-              }}
-            >
-              {mode}
-            </button>
-          ))}
-       </div>
-       <Button 
-         size="xs" 
-         variant="ghost" 
-         className="w-full gap-2 border border-base-200"
-         onClick={() => updateNodeData(node.id, { label: generateLorem(node.data.loremConfig?.mode || 'medium') })}
-       >
-         <RefreshCw className="w-3 h-3" /> Regenerate Text
-       </Button>
-    </div>
+    <LoremControlView
+      mode={mode}
+      onSetMode={(m) => updateNodeData(node.id, { label: generateLorem(m), loremConfig: { mode: m } })}
+      onRegenerate={() => updateNodeData(node.id, { label: generateLorem(node.data.loremConfig?.mode || 'medium') })}
+    />
   );
 };
