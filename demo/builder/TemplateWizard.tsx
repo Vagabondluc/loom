@@ -299,7 +299,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
             {/* 5. Context */}
             <section>
                 <TemplateWizardStepHeaderView index={5} title="Additional Context" color="bg-base-300 text-base-content" />
-                <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} />
+                <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} label="Additional Context" />
             </section>
             <TemplateWizardErrorAlertView message={error} onClose={() => setError(null)} />
 
