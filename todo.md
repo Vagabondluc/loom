@@ -343,6 +343,15 @@ Target: Extract interactive, feedback-driven UI into `ui/` while preserving iner
 
 ---
 
+#### Recent Activity (Dec 13, 2025)
+
+- 2025-12-13: **Panel Header Standardization:** Introduced `ui/molecules/PanelHeaderView.tsx` and replaced inline panel/header markup across builder and palette panes (e.g., `BuilderProperties.tsx`, `BuilderNavigator.tsx`, `TemplatesTab.tsx`, `MarkdownTab.tsx`, `ExportModal.tsx`, `ComponentsTab.tsx`). Changes committed to branch `refactor/phase27-layout-editor` and pushed. — tool-assisted
+- 2025-12-13: **Template Card:** `TemplateCardView` added to `ui/molecules` and wired into `demo/builder/palette/TemplatesTab.tsx`. — tool-assisted
+
+Notes: Continuing sweep for small card patterns and other presentational extractions (in-progress). Run `scripts/check-shim-purity.sh` after each extraction and ensure `get_errors` fixups for typings are addressed in follow-up dev-dependency updates.
+
+---
+
 #### Phase 27 Execution Backlog — Modals/Toasts/Preline (Priority 2)
 - Items:
     - [ ] `Modal.tsx` and demo preline modals — extract UI → `ui/` and runtime init to `services/preline`.
