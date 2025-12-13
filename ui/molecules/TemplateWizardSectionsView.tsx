@@ -24,7 +24,6 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
         suggestions[pageType].map(section => {
           const isSelected = !!selectedSections[section];
           const isExpanded = expandedSection === section;
-          const config = sectionConfig[section] || {};
           const instructorTip = sectionInstructions?.[section] || null;
 
           return (
