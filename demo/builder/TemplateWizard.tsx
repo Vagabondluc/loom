@@ -7,11 +7,13 @@ import { buildTemplateWizardPrompt, ContentStrategy, SectionConfig } from '../..
 import { COMPONENT_REGISTRY } from './registries';
 import { ai } from '../../services/ai';
 import { Type as GenAiType } from '@google/genai';
-import { 
-  Wand2, X, LayoutTemplate, Palette, Type, 
-  FileText, AlignLeft, Heading, Ban, Image as ImageIcon, Box, Link as LinkIcon,
-  Check, AlertCircle, Sparkles, ChevronDown, ChevronUp, Layout
-} from 'lucide-react';
+import { FileText, AlignLeft, Heading, Ban, Image as ImageIcon, Box, Link as LinkIcon, Check, AlertCircle, Sparkles, ChevronDown, ChevronUp, Layout } from 'lucide-react';
+import TemplateWizardHeaderView from '../../ui/molecules/TemplateWizardHeaderView';
+import PageTypeCardView from '../../ui/molecules/PageTypeCardView';
+import TemplateWizardContentStrategyView from '../../ui/molecules/TemplateWizardContentStrategyView';
+import VisualStyleSelectorView from '../../ui/molecules/VisualStyleSelectorView';
+import TemplateWizardSectionsView from '../../ui/molecules/TemplateWizardSectionsView';
+import TemplateWizardFooterView from '../../ui/molecules/TemplateWizardFooterView';
 import { clsx } from 'clsx';
 
 interface TemplateWizardProps {
@@ -233,20 +235,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
   return (
     <div className="fixed inset-0 z-50 bg-base-100 flex flex-col animate-in fade-in duration-200">
       
-      {/* Header */}
-      <div className="navbar border-b border-base-200 px-6 h-16 flex-shrink-0 bg-base-100">
-        <div className="flex-1 flex flex-col items-start justify-center">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-                <Wand2 className="w-5 h-5 text-primary" /> Procedural Page Wizard
-            </h2>
-            <p className="text-xs text-base-content/60">Define your intent, and AI will construct the structure.</p>
-        </div>
-        <div className="flex-none">
-            <button className="btn btn-ghost btn-circle" onClick={onClose} disabled={isGenerating}>
-                <X className="w-6 h-6" />
-            </button>
-        </div>
-      </div>
+      <TemplateWizardHeaderView title="Procedural Page Wizard" subtitle="Define your intent, and AI will construct the structure." isGenerating={isGenerating} onClose={onClose} />
 
       {/* Scrollable Body */}
       <div className="flex-1 overflow-y-auto bg-base-200/50">
@@ -260,22 +249,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {PAGE_TYPES.map(type => (
-                        <div 
-                            key={type.id}
-                            className={clsx(
-                                "card card-bordered cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99]",
-                                pageType === type.id ? "border-primary ring-1 ring-primary bg-base-100" : "bg-base-100 border-base-300 hover:border-base-content/30"
-                            )}
-                            onClick={() => handlePageTypeChange(type.id)}
-                        >
-                            <div className="card-body p-4">
-                                <div className="flex justify-between items-start">
-                                    <h4 className="font-bold text-sm">{type.id}</h4>
-                                    {pageType === type.id && <Check className="w-4 h-4 text-primary" />}
-                                </div>
-                                <p className="text-xs text-base-content/70">{type.desc}</p>
-                            </div>
-                        </div>
+                        <PageTypeCardView key={type.id} id={type.id} desc={type.desc} selected={pageType === type.id} onSelect={handlePageTypeChange} />
                     ))}
                 </div>
             </section>
@@ -286,69 +260,62 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     <div className="w-8 h-8 rounded-full bg-info/10 flex items-center justify-center text-info font-bold">2</div>
                     <h3 className="text-lg font-bold">Content Strategy</h3>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-1">
-                    {/* Text Mode */}
-                    <div className="form-control w-full">
-                        <label className="label text-sm font-bold opacity-70">Text Placeholders</label>
-                        <div className="join w-full">
-                            {[
-                                { id: 'realistic', label: 'Realistic', icon: FileText },
-                                { id: 'lorem', label: 'Lorem', icon: AlignLeft },
-                                { id: 'headings', label: 'Heads', icon: Heading },
-                                { id: 'empty', label: 'None', icon: Ban }
-                            ].map(opt => (
-                                <input
-                                    key={opt.id}
-                                    className="join-item btn btn-sm flex-1"
-                                    type="radio"
-                                    name="textMode"
-                                    aria-label={opt.label}
-                                    checked={contentStrategy.textMode === opt.id}
-                                    onChange={() => setContentStrategy(s => ({ ...s, textMode: opt.id as any }))}
-                                />
-                            ))}
+                <TemplateWizardContentStrategyView
+                    textMode={contentStrategy.textMode}
+                    imageMode={contentStrategy.imageMode}
+                    onChangeTextMode={(m) => setContentStrategy(s => ({ ...s, textMode: m as any }))}
+                    onChangeImageMode={(m) => setContentStrategy(s => ({ ...s, imageMode: m as any }))}
+                />
+                {expandedSection && selectedSections[expandedSection] && (
+                    <div className="bg-base-200/50 p-4 border-t border-base-200 rounded-b-xl animate-in slide-in-from-top-1">
+                        <div className="text-[10px] font-bold uppercase opacity-40 mb-3 tracking-wider flex items-center gap-2">
+                            <Layout className="w-3 h-3" /> Section Configuration
                         </div>
-                        <div className="label">
-                            <span className="label-text-alt opacity-60">
-                                {contentStrategy.textMode === 'realistic' && 'Context-aware marketing copy.'}
-                                {contentStrategy.textMode === 'lorem' && 'Standard Latin filler text.'}
-                                {contentStrategy.textMode === 'headings' && 'Headlines only, no body text.'}
-                                {contentStrategy.textMode === 'empty' && 'Structural skeleton only.'}
-                            </span>
-                        </div>
-                    </div>
+                        {expandedSection === 'Hero' && (
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="form-control">
+                                    <label className="label text-xs py-1">Layout</label>
+                                    <select className="select select-bordered select-xs" value={sectionConfig[expandedSection]?.layout || 'split'} onChange={(e) => updateSectionConfig(expandedSection, 'layout', e.target.value)}>
+                                        <option value="split">Split (Left/Right)</option>
+                                        <option value="centered">Centered</option>
+                                    </select>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label text-xs py-1">Media</label>
+                                    <select className="select select-bordered select-xs" value={sectionConfig[expandedSection]?.image || 'default'} onChange={(e) => updateSectionConfig(expandedSection, 'image', e.target.value)}>
+                                        <option value="default">Image</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        )}
 
-                    {/* Image Mode */}
-                    <div className="form-control w-full">
-                        <label className="label text-sm font-bold opacity-70">Image Placeholders</label>
-                        <div className="join w-full">
-                            {[
-                                { id: 'picsum', label: 'Picsum', icon: ImageIcon },
-                                { id: 'solid', label: 'Solid', icon: Box },
-                                { id: 'custom', label: 'URL', icon: LinkIcon },
-                                { id: 'none', label: 'None', icon: Ban }
-                            ].map(opt => (
-                                <input
-                                    key={opt.id}
-                                    className="join-item btn btn-sm flex-1"
-                                    type="radio"
-                                    name="imageMode"
-                                    aria-label={opt.label}
-                                    checked={contentStrategy.imageMode === opt.id}
-                                    onChange={() => setContentStrategy(s => ({ ...s, imageMode: opt.id as any }))}
-                                />
-                            ))}
-                        </div>
-                        <div className="label">
-                            <span className="label-text-alt opacity-60">
-                                {contentStrategy.imageMode === 'picsum' && 'Random stock photography.'}
-                                {contentStrategy.imageMode === 'solid' && 'Neutral colored blocks.'}
-                                {contentStrategy.imageMode === 'custom' && 'Static placeholder URL.'}
-                                {contentStrategy.imageMode === 'none' && 'Layout containers only.'}
-                            </span>
-                        </div>
+                        {(expandedSection === 'Feature Grid' || expandedSection === 'Features') && (
+                            <div className="form-control">
+                                <label className="label text-xs py-1">Count</label>
+                                <div className="join">
+                                    {[3, 4, 6].map(n => (
+                                        <button key={n} className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.count === n ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'count', n)}>{n}</button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {expandedSection === 'Footer' && (
+                            <div className="form-control">
+                                <label className="label text-xs py-1">Complexity</label>
+                                <div className="join">
+                                    <button className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.style === 'simple' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'style', 'simple')}>Simple</button>
+                                    <button className={`join-item btn btn-xs ${sectionConfig[expandedSection]?.style === 'complex' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(expandedSection, 'style', 'complex')}>Multi-Column</button>
+                                </div>
+                            </div>
+                        )}
+
+                        {expandedSection !== 'Hero' && expandedSection !== 'Feature Grid' && expandedSection !== 'Features' && expandedSection !== 'Footer' && (
+                            <div className="text-xs opacity-50 italic">No specific overrides available for this section.</div>
+                        )}
                     </div>
-                </div>
+                )}
             </section>
 
             {/* 3. Visual Style */}
@@ -357,20 +324,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold">3</div>
                     <h3 className="text-lg font-bold">Visual Style</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    {VISUAL_STYLES.map(style => (
-                        <button
-                            key={style.id}
-                            className={clsx(
-                                "btn btn-sm",
-                                visualStyle === style.id ? "btn-secondary" : "btn-ghost border-base-300"
-                            )}
-                            onClick={() => setVisualStyle(style.id)}
-                        >
-                            {style.id}
-                        </button>
-                    ))}
-                </div>
+                <VisualStyleSelectorView options={VISUAL_STYLES} selected={visualStyle} onSelect={setVisualStyle} />
             </section>
 
             {/* 4. Sections & Overrides */}
@@ -380,107 +334,20 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                     <h3 className="text-lg font-bold">Structure & Overrides</h3>
                 </div>
                 
-                <div className="flex flex-col gap-2">
-                    {SECTION_SUGGESTIONS[pageType]?.length > 0 ? (
-                        SECTION_SUGGESTIONS[pageType].map(section => {
-                            const isSelected = !!selectedSections[section];
-                            const isExpanded = expandedSection === section;
-                            const config = sectionConfig[section] || {};
-                            const instructorTip = SECTION_INSTRUCTION[section];
-
-                            return (
-                                <div key={section} className={clsx("card card-bordered card-compact transition-all", isSelected ? "bg-base-100 shadow-sm border-base-300" : "bg-transparent border-transparent opacity-50")}>
-                                    <div className="card-body flex-row items-center gap-4 py-3">
-                                        <input 
-                                            type="checkbox" 
-                                            className="checkbox checkbox-sm checkbox-primary"
-                                            checked={isSelected}
-                                            onChange={(e) => {
-                                                setSelectedSections(prev => ({ ...prev, [section]: e.target.checked }));
-                                                if (!e.target.checked && expandedSection === section) setExpandedSection(null);
-                                            }}
-                                        />
-                                        
-                                        <div className="flex-1 cursor-pointer" onClick={() => isSelected && setExpandedSection(isExpanded ? null : section)}>
-                                            <div className="flex items-center gap-2">
-                                                <span className="font-bold text-sm">{section}</span>
-                                                {instructorTip && <span className="badge badge-ghost badge-xs font-normal opacity-70 hidden sm:inline-flex">Purpose</span>}
-                                            </div>
-                                            {instructorTip && <p className="text-xs opacity-60 mt-0.5">{instructorTip}</p>}
-                                        </div>
-
-                                        {isSelected && (
-                                            <button 
-                                                className="btn btn-xs btn-ghost btn-square"
-                                                onClick={() => setExpandedSection(isExpanded ? null : section)}
-                                            >
-                                                {isExpanded ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>}
-                                            </button>
-                                        )}
-                                    </div>
-
-                                    {/* Config Panel */}
-                                    {isSelected && isExpanded && (
-                                        <div className="bg-base-200/50 p-4 border-t border-base-200 rounded-b-xl animate-in slide-in-from-top-1">
-                                            <div className="text-[10px] font-bold uppercase opacity-40 mb-3 tracking-wider flex items-center gap-2">
-                                                <Layout className="w-3 h-3" /> Section Configuration
-                                            </div>
-                                            
-                                            {section === 'Hero' && (
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <div className="form-control">
-                                                        <label className="label text-xs py-1">Layout</label>
-                                                        <select className="select select-bordered select-xs" value={config.layout || 'split'} onChange={(e) => updateSectionConfig(section, 'layout', e.target.value)}>
-                                                            <option value="split">Split (Left/Right)</option>
-                                                            <option value="centered">Centered</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="form-control">
-                                                        <label className="label text-xs py-1">Media</label>
-                                                        <select className="select select-bordered select-xs" value={config.image || 'default'} onChange={(e) => updateSectionConfig(section, 'image', e.target.value)}>
-                                                            <option value="default">Image</option>
-                                                            <option value="none">None</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {(section === 'Feature Grid' || section === 'Features') && (
-                                                <div className="form-control">
-                                                    <label className="label text-xs py-1">Count</label>
-                                                    <div className="join">
-                                                        {[3, 4, 6].map(n => (
-                                                            <button key={n} className={`join-item btn btn-xs ${config.count === n ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(section, 'count', n)}>{n}</button>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {section === 'Footer' && (
-                                                <div className="form-control">
-                                                    <label className="label text-xs py-1">Complexity</label>
-                                                    <div className="join">
-                                                        <button className={`join-item btn btn-xs ${config.style === 'simple' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(section, 'style', 'simple')}>Simple</button>
-                                                        <button className={`join-item btn btn-xs ${config.style === 'complex' ? 'btn-active' : ''}`} onClick={() => updateSectionConfig(section, 'style', 'complex')}>Multi-Column</button>
-                                                    </div>
-                                                </div>
-                                            )}
-
-                                            {/* Generic / Fallback */}
-                                            {section !== 'Hero' && section !== 'Feature Grid' && section !== 'Features' && section !== 'Footer' && (
-                                                <div className="text-xs opacity-50 italic">No specific overrides available for this section.</div>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <div className="p-8 text-center opacity-50 border border-dashed border-base-300 rounded-lg">
-                            <Sparkles className="w-6 h-6 mx-auto mb-2 opacity-50" />
-                            No default sections for this archetype.
-                        </div>
-                    )}
+                <TemplateWizardSectionsView
+                    pageType={pageType}
+                    suggestions={SECTION_SUGGESTIONS}
+                    selectedSections={selectedSections}
+                    expandedSection={expandedSection}
+                    onToggleSelect={(sec, val) => {
+                        setSelectedSections(prev => ({ ...prev, [sec]: val }));
+                        if (!val && expandedSection === sec) setExpandedSection(null);
+                    }}
+                    onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
+                    sectionConfig={sectionConfig}
+                    sectionInstructions={SECTION_INSTRUCTION}
+                />
+                
                 </div>
             </section>
 
@@ -508,19 +375,8 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
          </div>
       </div>
 
-      {/* Footer */}
-      <div className="border-t border-base-200 p-4 bg-base-100 flex items-center justify-between flex-shrink-0">
-         <div className="text-xs opacity-50 hidden sm:block">
-            Generates static, editable nodes. No runtime JS.
-         </div>
-         <div className="flex gap-3">
-             <button className="btn btn-ghost" onClick={onClose} disabled={isGenerating}>Cancel</button>
-             <button className="btn btn-primary min-w-[160px]" onClick={handleGenerate} disabled={isGenerating}>
-                {isGenerating ? <span className="loading loading-spinner loading-xs"></span> : <Sparkles className="w-4 h-4 mr-2" />}
-                {isGenerating ? 'Weaving...' : 'Generate Page'}
-             </button>
-         </div>
-      </div>
+        {/* Footer */}
+        <TemplateWizardFooterView isGenerating={isGenerating} onCancel={onClose} onGenerate={handleGenerate} />
 
     </div>
   );
