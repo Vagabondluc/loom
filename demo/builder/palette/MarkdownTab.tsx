@@ -5,6 +5,7 @@ import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
 import { Badge, EmptyStateView, PanelHeaderView } from '../../../ui';
+import { DraggableBlockView } from '../../../ui/molecules/DraggableBlockView';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
 interface ParsedBlock {
@@ -129,24 +130,15 @@ export const MarkdownTab: React.FC = () => {
               if (!template) return null;
 
               return (
-                  <div 
-                    key={i}
-                    tabIndex={0}
-                    role="button"
-                    style={{ touchAction: 'none' }}
-                    onPointerDown={(e) => handleMouseDown(e, template)}
-                    onKeyDown={(e) => handleKeyDown(e, template)}
-                    className="p-3 bg-base-100 border border-base-300 rounded text-xs cursor-grab active:cursor-grabbing hover:border-primary flex items-center gap-3 transition-colors hover:bg-base-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"
-                  >
-                    <span className="opacity-50">{block.icon}</span>
-                    <div className="truncate flex-1">
-                      <span className="font-bold mr-2 text-[10px] opacity-40 uppercase">{block.type}</span>
-                      {block.tagName && (
-                        <Badge variant="ghost" size="xs" className="mr-2">{block.tagName}</Badge>
-                      )}
-                      <span className="truncate">{block.label}</span>
-                    </div>
-                  </div>
+                <DraggableBlockView
+                  key={i}
+                  icon={block.icon}
+                  typeLabel={block.type}
+                  tagName={block.tagName}
+                  label={block.label}
+                  onPointerDown={(e) => handleMouseDown(e, template)}
+                  onKeyDown={(e) => handleKeyDown(e, template)}
+                />
               );
           })}
           {parsedBlocks.length === 0 && (
