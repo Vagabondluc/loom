@@ -1,4 +1,4 @@
-import { BuilderNode } from '../types';
+import { BuilderNode } from '../../types';
 
 interface IntentNode {
   id: string;

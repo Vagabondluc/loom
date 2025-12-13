@@ -1,4 +1,4 @@
-import { BuilderNode } from '../types';
+import { BuilderNode } from '../../types';
 import { generateResponsiveClasses } from '../runtime/layoutUtils';
 
 export const generateJSX = (nodes: Record<string, BuilderNode>, nodeId: string, componentRegistry: Record<string, any>, indentLevel = 0): string => {
