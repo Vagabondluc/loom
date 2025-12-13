@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, CardTitle, Button, CodeLabel } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge } from '../../ui';
 import { useBuilderStore } from '../builder/store';
 import { Save, Trash2, FolderOpen, Database } from 'lucide-react';
 
@@ -62,7 +62,7 @@ export const StorageSection: React.FC = () => {
                     <td className="font-mono text-xs opacity-50">#{proj.id}</td>
                     <td className="font-bold">{proj.name}</td>
                     <td className="text-sm opacity-70">{proj.updatedAt.toLocaleString()}</td>
-                    <td><div className="badge badge-sm badge-ghost">{Object.keys(proj.nodes).length} nodes</div></td>
+                    <td><Badge variant="ghost" size="sm">{Object.keys(proj.nodes).length} nodes</Badge></td>
                     <td className="flex justify-end gap-2">
                       <button 
                         className="btn btn-sm btn-ghost gap-2"

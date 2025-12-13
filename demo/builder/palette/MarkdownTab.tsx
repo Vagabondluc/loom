@@ -4,6 +4,7 @@ import { usePaletteInteractions } from './usePaletteInteractions';
 import { componentToTemplate } from './utils';
 import { COMPONENT_REGISTRY } from '../registries';
 import { Image as ImageIcon, Heading, Quote, List, FileText, Code } from 'lucide-react';
+import { Badge } from '../../../ui';
 import { getMarkdownTokens } from '../../../utils/markdown';
 
 interface ParsedBlock {
@@ -140,7 +141,7 @@ export const MarkdownTab: React.FC = () => {
                     <div className="truncate flex-1">
                       <span className="font-bold mr-2 text-[10px] opacity-40 uppercase">{block.type}</span>
                       {block.tagName && (
-                        <span className="badge badge-xs badge-ghost mr-2">{block.tagName}</span>
+                        <Badge variant="ghost" size="xs" className="mr-2">{block.tagName}</Badge>
                       )}
                       <span className="truncate">{block.label}</span>
                     </div>

@@ -7,6 +7,7 @@ import { clsx } from 'clsx';
 import { QuickActionsToolbar } from './canvas/QuickActionsToolbar';
 import { COMPONENT_REGISTRY } from './registries';
 import { PlayCircle } from 'lucide-react';
+import { Badge } from '../../ui';
 
 export const CanvasOverlay: React.FC = () => {
   const selectedNodeId = useBuilderStore(s => s.selectedNodeId);
@@ -161,12 +162,10 @@ export const CanvasOverlay: React.FC = () => {
             <span>{node.type}</span>
             <span className="opacity-70">#{node.id.substr(-4)}</span>
             {node.layout?.mode !== 'static' && (
-               <span className="badge badge-xs badge-neutral bg-black/20 border-none text-white">
-                 {node.layout?.mode}
-               </span>
+              <Badge variant="neutral" size="xs" className="bg-black/20 border-none text-white">{node.layout?.mode}</Badge>
             )}
             {showDebugOutlines && rect.type === 'interaction' && (
-               <span className="badge badge-xs badge-error text-white">Expanded</span>
+              <Badge variant="error" size="xs" className="text-white">Expanded</Badge>
             )}
           </div>
           
