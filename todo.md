@@ -224,6 +224,22 @@ Each commit should compile independently.
 
 Before merging:
 - [ ] No duplicate files exist
+
+---
+
+### Execution Progress: File Movement (Status)
+
+- [x] Full `utils/` move pass — canonical utils moved to `services/utils` (lorem, componentToTemplate)
+- [x] Full `stores/` move pass — canonical slices and helpers moved to `stores/` (projectSlice, treeSlice, uiSlice, selectionSlice)
+- [x] Full `services/` move pass — export/runtime logic moved to `services/` and demo files shimmed
+- [ ] Full `ui/` move pass — pending: review generic UI components to extract into `ui/` if appropriate
+- [x] `config/` normalization — target config files moved to `config/` and pluralized where needed
+- [ ] Final `demo/` isolation pass — pending: verify only UI + shims remain in `demo/`
+- [~] TS integrity sweep — editor TS checks pass for changed files; CI `tsc` will run on PR
+- [ ] Final validation checklist — pending: final CI and manual review
+
+Notes: The PR `refactor/extract-runtime-export-shims` contains many of these changes; CI shim purity passed while contract checks flag pre-existing documentation issues that will be remediated in a separate PR.
+
 - [ ] No empty legacy files exist
 - [ ] All imports point to canonical paths
 - [ ] CI rules pass
