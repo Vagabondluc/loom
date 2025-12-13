@@ -25,6 +25,7 @@ export const LayoutEditorView: React.FC<LayoutEditorViewProps> = ({
   onSnapshot,
   isOverridden,
   OverrideDot,
+  children,
 }) => {
   if (!layout) return null;
 
@@ -80,8 +81,8 @@ export const LayoutEditorView: React.FC<LayoutEditorViewProps> = ({
         {isOverridden && isOverridden('mode') ? `Mode overridden in ${activeBreakpoint}` : 'Inherited Mode'}
       </div>
 
-          {/* Parent renders FlexControls or GridControls as children and provides callbacks */}
-          {children}
+      {/* Parent renders FlexControls or GridControls as children and provides callbacks */}
+      {children}
     </div>
   );
 };

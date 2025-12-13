@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useBuilderStore } from '../store';
 import { LayoutConfig, Breakpoint, BuilderNode } from '../../../types';
@@ -20,22 +19,19 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
   const updateNodeLayout = useBuilderStore(s => s.updateNodeLayout);
   const snapshot = useBuilderStore(s => s.snapshot);
 
-  
-
   const layout = resolveEffectiveLayout(node, activeBreakpoint);
 
   const isOverridden = (key: keyof LayoutConfig) => {
-    if (activeBreakpoint === 'mobile') return false; 
+    if (activeBreakpoint === 'mobile') return false;
     const overrides = node.responsive?.[activeBreakpoint];
-    return overrides && overrides[key] !== undefined;
+    return !!(overrides && overrides[key] !== undefined);
   };
 
-  const OverrideDot = ({ prop }: { prop: keyof LayoutConfig }) => (
-    isOverridden(prop) ? <OverrideDotView /> : null
-  );
+  const OverrideDot = ({ prop }: { prop: keyof LayoutConfig }) =>
+    isOverridden(prop) ? <OverrideDotView /> : null;
 
   const handleUpdate = (updates: Partial<LayoutConfig>, skipHistory = true) => {
-      updateNodeLayout(node.id, updates, { skipHistory });
+    updateNodeLayout(node.id, updates, { skipHistory });
   };
 
   return (
@@ -46,32 +42,44 @@ export const LayoutEditor: React.FC<LayoutEditorProps> = ({ node }) => {
       onResetLayoutOverrides={() => resetLayoutOverrides(node.id)}
       onUpdate={(u, s) => updateNodeLayout(node.id, u, { skipHistory: !!s })}
       onSnapshot={snapshot}
-      isOverridden={(k) => {
-        if (activeBreakpoint === 'mobile') return false;
-        const overrides = node.responsive?.[activeBreakpoint];
-        return overrides && overrides[k] !== undefined;
-      }}
-      OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)}
+      isOverridden={isOverridden}
+      OverrideDot={OverrideDot}
     >
       {layout.mode === 'flex' && (
-        <FlexControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:false })} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)} />
+        <FlexControls
+          layout={layout}
+          onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory: false })}
+          OverrideDot={OverrideDot}
+        />
       )}
 
       {layout.mode === 'grid' && (
-        <GridControls layout={layout} onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory:true })} onSnapshot={snapshot} OverrideDot={({ prop }) => ( ( (activeBreakpoint !== 'mobile' && node.responsive?.[activeBreakpoint]?.[prop]) ) ? <OverrideDotView /> : null)} />
+        <GridControls
+          layout={layout}
+          onUpdate={(u) => updateNodeLayout(node.id, u, { skipHistory: true })}
+          onSnapshot={snapshot}
+          OverrideDot={OverrideDot}
+        />
       )}
 
       {(layout.mode === 'flex' || layout.mode === 'grid') && (
         <div className="form-control">
           <label className="label text-xs py-1">
-            <span>Gap: {layout.gap || 0} <OverrideDotView /></span>
+            <span>
+              Gap: {layout.gap || 0} <OverrideDot prop="gap" />
+            </span>
           </label>
           <input
-            type="range" min="0" max="12" step="1"
+            type="range"
+            min="0"
+            max="12"
+            step="1"
             value={layout.gap || 0}
             className="range range-xs"
             onPointerDown={() => snapshot()}
-            onChange={(e) => updateNodeLayout(node.id, { gap: parseInt(e.target.value) }, { skipHistory: true })}
+            onChange={(e) =>
+              updateNodeLayout(node.id, { gap: parseInt(e.target.value) }, { skipHistory: true })
+            }
           />
         </div>
       )}
