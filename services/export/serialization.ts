@@ -1,6 +1,8 @@
 import { BuilderNode } from '../../types';
 
-export const exportToJSON = (nodes: Record<string, BuilderNode>) => {
+export const exportToJSON = (nodes: Record<string, BuilderNode>, rootId: string) => {
+  // Note: rootId is accepted for ExportTarget interface consistency but not used
+  // since this export type performs a lossless full dump of all nodes
   return JSON.stringify(nodes, null, 2);
 };
 
