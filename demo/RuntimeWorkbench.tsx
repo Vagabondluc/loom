@@ -7,6 +7,7 @@ import { RuntimeVariableEditor } from './builder/properties/RuntimeVariableEdito
 import { useRuntimeStore } from '../stores/runtimeStore';
 import { componentToTemplate } from './builder/palette/utils';
 import { Play, RotateCcw, Bug, Terminal, Activity, XCircle } from 'lucide-react';
+import StageErrorView from '../ui/molecules/StageErrorView';
 import { prelineAccordionTemplate, prelineModalTemplate, prelineTabsTemplate, genericFallbackTemplate } from '../../ui/molecules/RuntimeTemplateStrings';
 import { clsx } from 'clsx';
 
@@ -31,16 +32,7 @@ class StageErrorBoundary extends React.Component<{ children: React.ReactNode, on
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div className="p-6 text-center text-error bg-error/10 rounded-box border border-error/20">
-          <Bug className="w-8 h-8 mx-auto mb-2" />
-          <h3 className="font-bold">Runtime Crash</h3>
-          <p className="text-sm opacity-80 mb-4">{this.state.error?.message}</p>
-          <Button size="sm" variant="error" outline onClick={() => { this.setState({ hasError: false }); this.props.onReset(); }}>
-            Reset Stage
-          </Button>
-        </div>
-      );
+            return <StageErrorView message={this.state.error?.message} onReset={() => { this.setState({ hasError: false }); this.props.onReset(); }} />;
     }
     return this.props.children;
   }
