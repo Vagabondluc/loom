@@ -235,8 +235,11 @@ Before merging:
 - [ ] Full `ui/` move pass — pending: review generic UI components to extract into `ui/` if appropriate
 - [x] `config/` normalization — target config files moved to `config/` and pluralized where needed
 - [ ] Final `demo/` isolation pass — pending: verify only UI + shims remain in `demo/`
+ - [ ] Final `demo/` isolation pass — pending: verify only UI + shims remain in `demo/`
 - [~] TS integrity sweep — editor TS checks pass for changed files; CI `tsc` will run on PR
 - [ ] Final validation checklist — pending: final CI and manual review
+ - [ ] Final validation checklist — pending: final CI and manual review
+ - [x] PR Summary added: `PR_SUMMARY.md` — ready for review
 
 #### UI Move Pass — Candidate List (Initial)
 
@@ -248,6 +251,7 @@ Additional story components extracted: StoryEditor, StorySidebar, StoryLogicView
 - [x] CompositeSection (demo/sections/CompositeSection.tsx) — Extracted to `ui/sections/CompositeSection.tsx`.
 - [x] StatusSection (demo/sections/StatusSection.tsx) — Extracted to `ui/sections/StatusSection.tsx`.
  - [x] TablesSection (demo/sections/TablesSection.tsx) — Extracted to `ui/sections/TablesSection.tsx`.
+ - [x] CarouselSection (demo/sections/CarouselSection.tsx) — Extracted to `ui/sections/CarouselSection.tsx`.
 
 Recommendation: For each candidate, validate there are no editor-specific imports (builder store, demo-only utilities). If none, move to `ui/` and replace original with a shim re-export.
 

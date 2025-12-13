@@ -42,3 +42,5 @@ Entries:
  - 2025-12-13: Extracted `CompositeSection` to `ui/sections/CompositeSection` and replaced `demo/` shim. — tool-assisted
  - 2025-12-13: Extracted `StatusSection` to `ui/sections/StatusSection` and replaced `demo/` shim. — tool-assisted
  - 2025-12-13: Extracted `TablesSection` to `ui/sections/TablesSection` and replaced `demo/` shim. — tool-assisted
+ - 2025-12-13: Extracted `CarouselSection` to `ui/sections/CarouselSection` and replaced `demo/` shim. — tool-assisted
+ - 2025-12-13: Added `PR_SUMMARY.md` with extraction details and paused further extraction for review. — tool-assisted
