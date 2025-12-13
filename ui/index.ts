@@ -18,3 +18,5 @@ export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';
 export * from './ThemeControls';
+export * from './StoryToolbar';
+export * from './StorySidebar';
