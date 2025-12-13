@@ -1,6 +1,6 @@
 import { BuilderNode } from '../../types';
 
-export const exportToJSON = (nodes: Record<string, BuilderNode>) => {
+export const exportToJSON = (nodes: Record<string, BuilderNode>, rootId: string) => {
   return JSON.stringify(nodes, null, 2);
 };
 
