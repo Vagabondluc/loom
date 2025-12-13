@@ -18,6 +18,7 @@ export * from './composites/Panel';
 export * from './composites/Surface';
 export * from './composites/Toolbar';
 export * from './sections/inputs/BasicInputs';
+export * from './sections/inputs/SpecializedInputs';
 export * from './ThemeControls';
 export * from './StoryToolbar';
 export * from './StorySidebar';
