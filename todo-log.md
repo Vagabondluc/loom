@@ -16,7 +16,6 @@ Entries:
 - 2025-12-13: Identified canonical runtime roots: `ui/`, `stores/`, `services/`, `utils/`, `config/`. — tool-assisted
 - 2025-12-13: Created canonical target folders and placeholder index.ts files for `stores`, `services`, `utils`, and `config`. — tool-assisted
 
-
 - 2025-12-13: Normalized attributions in todo-log.md to '— tool-assisted'. — tool-assisted
 
-- 2025-12-13: Created canonical index.ts placeholders for stores, services, utils, and config. — tool-assisted
+- 2025-12-13: Updated services/promptBuilder to accept `availableComponents` param and removed direct demo import; updated TemplateWizard to pass the registry keys. — tool-assisted
