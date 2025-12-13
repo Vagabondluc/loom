@@ -293,8 +293,8 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
                 {expandedSection && selectedSections[expandedSection] && (
                     <TemplateWizardSectionConfigView section={expandedSection} config={sectionConfig[expandedSection]} onChange={(key, val) => updateSectionConfig(expandedSection, key, val)} />
                 )}
-                </div>
             </section>
+                </div>
 
             {/* 5. Context */}
             <section>
