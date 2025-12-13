@@ -240,10 +240,11 @@ Before merging:
 
 #### UI Move Pass — Candidate List (Initial)
 
-- ThemePreview (demo/theme/ThemePreview.tsx) — Preview UI; candidate for `ui/` if reused.
-- ThemeControls (demo/theme/ThemeControls.tsx) — Control UI; candidate only if it is generic.
-- StoryPreview (demo/story/StoryPreview.tsx) — Might be demo-specific; leave unless reused.
-- StoryToolbar (demo/story/StoryToolbar.tsx) — Generic toolbar candidate for `ui/`.
+- [x] ThemePreview (demo/theme/ThemePreview.tsx) — Preview UI; candidate for `ui/` if reused; extracted.
+- [x] ThemeControls (demo/theme/ThemeControls.tsx) — Control UI; candidate only if it is generic; extracted.
+- [x] StoryPreview (demo/story/StoryPreview.tsx) — Extracted to `ui/`.
+- [x] StoryToolbar (demo/story/StoryToolbar.tsx) — Extracted to `ui/`.
+Additional story components extracted: StoryEditor, StorySidebar, StoryLogicView.
 
 Recommendation: For each candidate, validate there are no editor-specific imports (builder store, demo-only utilities). If none, move to `ui/` and replace original with a shim re-export.
 
