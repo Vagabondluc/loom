@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useBuilderStore } from './store';
 import { useToastStore } from '../../stores/toastStore';
@@ -18,7 +17,6 @@ import TemplateWizardStepHeaderView from '../../ui/molecules/TemplateWizardStepH
 import { clsx } from 'clsx';
 import TemplateWizardContextView from '../../ui/molecules/TemplateWizardContextView';
 import TemplateWizardErrorAlertView from '../../ui/molecules/TemplateWizardErrorAlertView';
-import TemplateWizardSectionConfigView from '../../ui/molecules/TemplateWizardSectionConfigView';
 
 interface TemplateWizardProps {
   open: boolean;
@@ -247,7 +245,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
             
             {/* 1. Page Archetype */}
             <section>
-                <TemplateWizardStepHeaderView index={1} title="Page Archetype" color="bg-primary/10" />
+                <TemplateWizardStepHeaderView index={1} title="Page Archetype" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {PAGE_TYPES.map(type => (
                         <PageTypeCardView key={type.id} id={type.id} desc={type.desc} selected={pageType === type.id} onSelect={handlePageTypeChange} />
@@ -257,7 +255,7 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
 
             {/* 2. Content Strategy */}
             <section>
-                <TemplateWizardStepHeaderView index={2} title="Content Strategy" color="bg-info/10 text-info" />
+                <TemplateWizardStepHeaderView index={2} title="Content Strategy" bg="bg-info/10" text="text-info" />
                 <TemplateWizardContentStrategyView
                     textMode={contentStrategy.textMode}
                     imageMode={contentStrategy.imageMode}
@@ -269,36 +267,44 @@ export const TemplateWizard: React.FC<TemplateWizardProps> = ({ open, onClose })
 
             {/* 3. Visual Style */}
             <section>
-                <TemplateWizardStepHeaderView index={3} title="Visual Style" color="bg-secondary/10 text-secondary" />
+                <TemplateWizardStepHeaderView index={3} title="Visual Style" bg="bg-secondary/10" text="text-secondary" />
                 <VisualStyleSelectorView options={VISUAL_STYLES} selected={visualStyle} onSelect={setVisualStyle} />
             </section>
 
             {/* 4. Sections & Overrides */}
             <section>
-                <TemplateWizardStepHeaderView index={4} title="Structure & Overrides" color="bg-accent/10 text-accent" />
+                <TemplateWizardStepHeaderView index={4} title="Structure & Overrides" bg="bg-accent/10" text="text-accent" />
                 
-                <TemplateWizardSectionsView
-                    pageType={pageType}
-                    suggestions={SECTION_SUGGESTIONS}
-                    selectedSections={selectedSections}
-                    expandedSection={expandedSection}
-                    onToggleSelect={(sec, val) => {
-                        setSelectedSections(prev => ({ ...prev, [sec]: val }));
-                        if (!val && expandedSection === sec) setExpandedSection(null);
-                    }}
-                    onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
-                    sectionConfig={sectionConfig}
-                    sectionInstructions={SECTION_INSTRUCTION}
-                />
-                {expandedSection && selectedSections[expandedSection] && (
-                    <TemplateWizardSectionConfigView section={expandedSection} config={sectionConfig[expandedSection]} onChange={(key, val) => updateSectionConfig(expandedSection, key, val)} />
-                )}
+            <TemplateWizardSectionsView
+              pageType={pageType}
+              suggestions={SECTION_SUGGESTIONS}
+              selectedSections={selectedSections}
+              expandedSection={expandedSection}
+              onToggleSelect={(sec, val) => {
+                setSelectedSections(prev => ({ ...prev, [sec]: val }));
+                if (!val && expandedSection === sec) setExpandedSection(null);
+              }}
+              onToggleExpand={(sec) => setExpandedSection(expandedSection === sec ? null : sec)}
+              sectionConfig={sectionConfig}
+              sectionInstructions={SECTION_INSTRUCTION}
+              onSectionConfigChange={updateSectionConfig}
+            />
+
+            {expandedSection && selectedSections[expandedSection] && (
+              <TemplateWizardSectionConfigView
+                section={expandedSection}
+                config={sectionConfig[expandedSection]}
+                onChange={(key, val) => updateSectionConfig(expandedSection, key, val)}
+              />
+            )}
             </section>
                 </div>
 
             {/* 5. Context */}
             <section>
                 <TemplateWizardStepHeaderView index={5} title="Additional Context" color="bg-base-300 text-base-content" />
+                <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} label="Additional Context" />
+                <TemplateWizardStepHeaderView index={5} title="Additional Context" bg="bg-base-300" text="text-base-content" />
                 <TemplateWizardContextView value={description} placeholder={"e.g., A minimalist portfolio for a landscape photographer focusing on nature shots."} onChange={(v) => setDescription(v)} />
             </section>
             <TemplateWizardErrorAlertView message={error} onClose={() => setError(null)} />
