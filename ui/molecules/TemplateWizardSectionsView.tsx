@@ -49,6 +49,7 @@ export const TemplateWizardSectionsView: React.FC<Props> = ({ pageType, suggesti
                   <button
                     className="btn btn-xs btn-ghost btn-square"
                     onClick={() => onToggleExpand(section)}
+                    aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${section} configuration`}
                   >
                     {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
