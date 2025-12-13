@@ -63,7 +63,6 @@ const StageContainer: React.FC<{ targetId: string, log: any }> = ({ targetId, lo
         }
         
         // Pre-fill content based on type for meaningful testing
-        import { prelineAccordionTemplate, prelineModalTemplate, prelineTabsTemplate, genericFallbackTemplate } from '../../ui/molecules/RuntimeTemplateStrings';
         if (targetId === 'preline-accordion') {
              el.innerHTML = prelineAccordionTemplate;
         } else if (targetId === 'preline-modal') {
