@@ -8,7 +8,6 @@ import { useRuntimeStore } from '../stores/runtimeStore';
 import { componentToTemplate } from './builder/palette/utils';
 import { Play, RotateCcw, Bug, Terminal, Activity, XCircle } from 'lucide-react';
 import StageErrorView from '../ui/molecules/StageErrorView';
-import { prelineAccordionTemplate, prelineModalTemplate, prelineTabsTemplate, genericFallbackTemplate } from '../../ui/molecules/RuntimeTemplateStrings';
 import { clsx } from 'clsx';
 
 interface LogEntry {
@@ -63,7 +62,6 @@ const StageContainer: React.FC<{ targetId: string, log: any }> = ({ targetId, lo
         }
         
         // Pre-fill content based on type for meaningful testing
-        import { prelineAccordionTemplate, prelineModalTemplate, prelineTabsTemplate, genericFallbackTemplate } from '../../ui/molecules/RuntimeTemplateStrings';
         if (targetId === 'preline-accordion') {
              el.innerHTML = prelineAccordionTemplate;
         } else if (targetId === 'preline-modal') {

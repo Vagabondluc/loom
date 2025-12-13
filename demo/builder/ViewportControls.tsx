@@ -4,7 +4,7 @@ import { useBuilderStore } from './store';
 import { Monitor, Tablet, Smartphone, RotateCw } from 'lucide-react';
 import { clsx } from 'clsx';
 import { Breakpoint } from '../../types';
-import { ViewportControlsView } from '../..//ui/molecules/ViewportControlsView';
+import { ViewportControlsView } from '../../ui/molecules/ViewportControlsView';
 
 export const ViewportControls: React.FC = () => {
   const activeBreakpoint = useBuilderStore(s => s.activeBreakpoint);

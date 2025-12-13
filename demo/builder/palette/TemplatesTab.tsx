@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { TEMPLATE_REGISTRY } from '../templates';
 import { usePaletteInteractions } from './usePaletteInteractions';
 import { LayoutTemplate, Sparkles, Server } from 'lucide-react';
-import { Badge, Button, TemplateCardView, PanelHeaderView } from '../../../ui';
+import { Button, TemplateCardView, PanelHeaderView } from '../../../ui';
 import { ProceduralWizardPanel } from './ProceduralWizardPanel';
 
 interface TemplatesTabProps {
