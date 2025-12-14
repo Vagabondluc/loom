@@ -1,15 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CodeLabel } from '../index';
+import { Card, CardTitle, CodeLabel, SectionHeaderView } from '../index';
 
 export const TablesSection: React.FC = () => {
   return (
     <section id="tables" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Tables</h2>
-        <p className="text-base-content/70">
-          Responsive data tables with support for zebra striping, row highlighting, and various sizes.
-        </p>
-      </div>
+      <SectionHeaderView title={"Tables"} subtitle={<p className="text-base-content/70">Responsive data tables with support for zebra striping, row highlighting, and various sizes.</p>} />
 
       <Card bordered>
         <CardTitle>Standard & Zebra</CardTitle>

@@ -1,17 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CodeLabel } from '../../ui';
+import { Card, CardTitle, CodeLabel, SectionHeaderView } from '../../ui';
 
 export const HeadlessPatternsSection: React.FC = () => {
   return (
     <section id="patterns" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Headless Patterns</h2>
-        <p className="text-base-content/70">
-          Pure CSS, state-driven components that work without JavaScript logic. 
-          These patterns use <code>input[type="radio"]</code> and sibling selectors to manage state, 
-          making them ideal for the Visual Builder export.
-        </p>
-      </div>
+      <SectionHeaderView title={"Headless Patterns"} subtitle={<p className="text-base-content/70">Pure CSS, state-driven components that work without JavaScript logic. These patterns use <code>input[type="radio"]</code> and sibling selectors to manage state, making them ideal for the Visual Builder export.</p>} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         

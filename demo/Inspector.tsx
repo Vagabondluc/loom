@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardTitle, CodeLabel, Alert } from '../ui';
+import { Card, CardTitle, CodeLabel, Alert, SectionHeaderView } from '../ui';
 import { Map, Link as LinkIcon, AlertTriangle } from 'lucide-react';
 
 interface ImportMap {
@@ -26,12 +26,7 @@ export const Inspector: React.FC = () => {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="prose max-w-none">
-        <h1 className="text-3xl font-bold border-b pb-2">Inspector</h1>
-        <p className="text-base-content/70">
-          Developer-focused tools for inspecting the application's runtime environment.
-        </p>
-      </div>
+      <SectionHeaderView title={"Inspector"} subtitle={<p className="text-base-content/70">Developer-focused tools for inspecting the application's runtime environment.</p>} />
 
       <Card bordered>
         <CardTitle className="flex items-center gap-2">

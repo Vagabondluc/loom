@@ -1,17 +1,11 @@
 import React from 'react';
-import { Card, CodeLabel, Tabs, Tab } from '../index';
+import { Card, CodeLabel, Tabs, Tab, SectionHeaderView } from '../index';
 import { Home, Search, Settings } from 'lucide-react';
 
 export const NavigationSection: React.FC = () => {
   return (
     <section id="navigation" className="space-y-6 scroll-mt-24">
-       <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Navigation</h2>
-        <p className="text-base-content/70">
-          Components to help users move through your application. From top-level <strong>Navbars</strong> 
-          to context-aware <strong>Breadcrumbs</strong> and multi-step processes.
-        </p>
-       </div>
+       <SectionHeaderView title={"Navigation"} subtitle={<p className="text-base-content/70">Components to help users move through your application. From top-level <strong>Navbars</strong> to context-aware <strong>Breadcrumbs</strong> and multi-step processes.</p>} />
        
        <Card bordered>
          <div className="space-y-12">

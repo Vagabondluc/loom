@@ -55,6 +55,7 @@ export * from './molecules/IconTile';
 export * from './molecules/PrelineButtonView';
 export * from './molecules/LogicTileView';
 export * from './molecules/CalloutView';
+export * from './molecules/SectionHeaderView';
 export * from './molecules/ValidationIssueView';
 export * from './molecules/StageErrorView';
 export * from './composites/Panel';

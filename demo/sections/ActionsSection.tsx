@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardTitle, CodeLabel } from '../../ui';
+import { Button, Card, CardTitle, CodeLabel, SectionHeaderView } from '../../ui';
 import { Zap, X, Menu } from 'lucide-react';
 
 interface ActionsSectionProps {
@@ -9,14 +9,7 @@ interface ActionsSectionProps {
 export const ActionsSection: React.FC<ActionsSectionProps> = ({ onOpenModal }) => {
   return (
     <section id="actions" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Actions</h2>
-        <p className="text-base-content/70">
-          Action components allow users to trigger events, navigate, or make choices. 
-          This section includes standard <strong>Buttons</strong>, <strong>Dropdowns</strong> for menus, 
-          <strong>Swaps</strong> for toggle states, and <strong>Modals</strong> for focused tasks.
-        </p>
-      </div>
+      <SectionHeaderView title={"Actions"} subtitle={<p className="text-base-content/70">Action components allow users to trigger events, navigate, or make choices. This section includes standard <strong>Buttons</strong>, <strong>Dropdowns</strong> for menus, <strong>Swaps</strong> for toggle states, and <strong>Modals</strong> for focused tasks.</p>} />
       
       <div className="grid gap-6">
         <Card bordered>

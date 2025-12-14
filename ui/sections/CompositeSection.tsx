@@ -1,17 +1,11 @@
 import React from 'react';
-import { Panel, Surface, Toolbar, Button, CodeLabel } from '../index';
+import { Panel, Surface, Toolbar, Button, CodeLabel, SectionHeaderView } from '../index';
 import { Layers, Search, Bell } from 'lucide-react';
 
 export const CompositeSection: React.FC = () => {
   return (
     <section id="composites" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Composite Primitives</h2>
-        <p className="text-base-content/70">
-          Superpower #8: High-level layout building blocks that abstract common Tailwind/DaisyUI patterns.
-          Use <strong>Surface</strong> for depth, <strong>Panel</strong> for content grouping, and <strong>Toolbar</strong> for action bars.
-        </p>
-      </div>
+      <SectionHeaderView title={"Composite Primitives"} subtitle={<p className="text-base-content/70">Superpower #8: High-level layout building blocks that abstract common Tailwind/DaisyUI patterns. Use <strong>Surface</strong> for depth, <strong>Panel</strong> for content grouping, and <strong>Toolbar</strong> for action bars.</p>} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         

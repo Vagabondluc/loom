@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardTitle, Button, Alert, Checkbox, Input, FormField } from '../../ui';
+import { Card, CardTitle, Button, Alert, Checkbox, Input, FormField, SectionHeaderView } from '../../ui';
 import { validateWithSchema, generateMockData } from '../../services/form';
 import { SCHEMAS, SchemaId } from '../../utils/schemaRegistry';
 import { ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
@@ -62,13 +62,7 @@ export const ZodSection: React.FC = () => {
 
   return (
     <section id="zod" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Zod Schema Playground</h2>
-        <p className="text-base-content/70">
-          Superpower #5: Define schemas in <code>utils/schemaRegistry.ts</code> and bind them to forms.
-          This playground infers UI directly from the Zod definitions.
-        </p>
-      </div>
+      <SectionHeaderView title={"Zod Schema Playground"} subtitle={<p className="text-base-content/70">Superpower #5: Define schemas in <code>utils/schemaRegistry.ts</code> and bind them to forms. This playground infers UI directly from the Zod definitions.</p>} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         

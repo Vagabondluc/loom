@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, CardTitle, Button, CodeLabel, Badge, EmptyStateView } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge, EmptyStateView, SectionHeaderView } from '../../ui';
 import { useBuilderStore } from '../builder/store';
 import { Save, Trash2, FolderOpen, Database } from 'lucide-react';
 
@@ -20,13 +20,7 @@ export const StorageSection: React.FC = () => {
 
   return (
     <section id="storage" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Persistence (Dexie.js)</h2>
-        <p className="text-base-content/70">
-          This section demonstrates <strong>IndexedDB</strong> integration using Dexie.js. 
-          Projects saved here are persistent across browser refreshes and sessions.
-        </p>
-      </div>
+      <SectionHeaderView title={"Persistence (Dexie.js)"} subtitle={<p className="text-base-content/70">This section demonstrates <strong>IndexedDB</strong> integration using Dexie.js. Projects saved here are persistent across browser refreshes and sessions.</p>} />
 
       <Card bordered>
         <CardTitle className="flex justify-between items-center">

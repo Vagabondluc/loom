@@ -1,16 +1,10 @@
 import React from 'react';
-import { CodeLabel } from '../index';
+import { CodeLabel, SectionHeaderView } from '../index';
 
 export const MockupSection: React.FC = () => {
   return (
     <section id="mockup" className="space-y-6 scroll-mt-24">
-       <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Mockups</h2>
-        <p className="text-base-content/70">
-          Pre-designed containers that mimic operating system windows, mobile devices, 
-          or browser frames to showcase content or screenshots.
-        </p>
-       </div>
+       <SectionHeaderView title={"Mockups"} subtitle={<p className="text-base-content/70">Pre-designed containers that mimic operating system windows, mobile devices, or browser frames to showcase content or screenshots.</p>} />
        
        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
          <div>

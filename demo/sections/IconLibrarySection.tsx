@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Card, Button, EmptyStateView, IconTile } from '../../ui';
+import { Card, Button, EmptyStateView, IconTile, SectionHeaderView } from '../../ui';
 import { useToastStore } from '../../stores/toastStore';
 import { Search, SlidersHorizontal, Tag as TagIcon, X } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -93,13 +93,7 @@ export const IconLibrarySection: React.FC = () => {
 
   return (
     <section id="icons" className="space-y-6 scroll-mt-24 animate-in fade-in">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Icon Library</h2>
-        <p className="text-base-content/70">
-          Browse the full set of <strong>Lucide React</strong> icons. 
-          Use the toolbar to customize the preview size and weight.
-        </p>
-      </div>
+      <SectionHeaderView title={"Icon Library"} subtitle={<p className="text-base-content/70">Browse the full set of <strong>Lucide React</strong> icons. Use the toolbar to customize the preview size and weight.</p>} />
 
       <Card bordered className="min-h-[500px] overflow-visible">
         

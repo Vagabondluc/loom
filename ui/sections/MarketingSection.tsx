@@ -1,16 +1,10 @@
 import React from 'react';
-import { Button, Card, CodeLabel } from '../index';
+import { Button, Card, CodeLabel, SectionHeaderView } from '../index';
 
 export const MarketingSection: React.FC = () => {
   return (
     <section id="marketing" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Marketing</h2>
-        <p className="text-base-content/70">
-          Large visual components for landing pages and structural areas. 
-          Includes <strong>Hero</strong> banners, <strong>Footers</strong>, and <strong>Glass</strong> effects.
-        </p>
-      </div>
+      <SectionHeaderView title={"Marketing"} subtitle={<p className="text-base-content/70">Large visual components for landing pages and structural areas. Includes <strong>Hero</strong> banners, <strong>Footers</strong>, and <strong>Glass</strong> effects.</p>} />
 
       <div className="space-y-6">
         <div className="hero min-h-[300px] rounded-box overflow-hidden" style={{backgroundImage: 'url(https://picsum.photos/id/1015/1000/400)'}}>

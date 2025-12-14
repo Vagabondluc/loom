@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Alert, Button } from '../../ui';
+import { Alert, Button, SectionHeaderView } from '../../ui';
 import { DemoView } from '../../types';
 import { ExternalLink } from 'lucide-react';
 import { PrelineStaticCard } from './preline/PrelineStaticCard';
@@ -14,14 +14,7 @@ interface PrelineSectionProps {
 export const PrelineSection: React.FC<PrelineSectionProps> = ({ setView }) => {
   return (
     <section id="preline" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Preline UI (Runtime Adapters)</h2>
-        <p className="text-base-content/70">
-          A utility-first component library used for <strong>Applets</strong>. 
-          In the Builder and Library, these components are rendered as <strong>Static Shells</strong> to prevent DOM conflicts.
-          Their behavior (JavaScript) is injected only in Preview Mode or the Runtime Workbench.
-        </p>
-      </div>
+      <SectionHeaderView title={"Preline UI (Runtime Adapters)"} subtitle={<p className="text-base-content/70">A utility-first component library used for <strong>Applets</strong>. In the Builder and Library, these components are rendered as <strong>Static Shells</strong> to prevent DOM conflicts. Their behavior (JavaScript) is injected only in Preview Mode or the Runtime Workbench.</p>} />
       
       <Alert variant="info">
         <div className="flex items-center justify-between w-full">

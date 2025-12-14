@@ -1,16 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CodeLabel } from '../index';
+import { Card, CardTitle, CodeLabel, SectionHeaderView } from '../index';
 
 export const StatusSection: React.FC = () => {
   return (
     <section id="status" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Status & Interactive</h2>
-        <p className="text-base-content/70">
-          Indicators for background processes and temporary notifications. 
-          Includes <strong>Loading</strong> states and <strong>Toast</strong> notifications.
-        </p>
-      </div>
+      <SectionHeaderView title={"Status & Interactive"} subtitle={<p className="text-base-content/70">Indicators for background processes and temporary notifications. Includes <strong>Loading</strong> states and <strong>Toast</strong> notifications.</p>} />
 
       <Card bordered>
         <CardTitle>Loading Indicators</CardTitle>

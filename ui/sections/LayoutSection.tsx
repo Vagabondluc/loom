@@ -1,17 +1,10 @@
 import React from 'react';
-import { Card, CardTitle, CodeLabel, Badge } from '../index';
+import { Card, CardTitle, CodeLabel, Badge, SectionHeaderView } from '../index';
 
 export const LayoutSection: React.FC = () => {
   return (
     <section id="layout" className="space-y-6 scroll-mt-24">
-       <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">Layout</h2>
-        <p className="text-base-content/70">
-          Utility components for positioning and grouping elements. 
-          <strong>Join</strong> groups items together, <strong>Stack</strong> creates a depth effect, 
-          and <strong>Mask</strong> crops images into shapes.
-        </p>
-       </div>
+       <SectionHeaderView title={"Layout"} subtitle={<p className="text-base-content/70">Utility components for positioning and grouping elements. <strong>Join</strong> groups items together, <strong>Stack</strong> creates a depth effect, and <strong>Mask</strong> crops images into shapes.</p>} />
 
        <div className="grid gap-6">
           <Card bordered>

@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { Card, CardTitle, Button, CodeLabel, Badge, CalloutView } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge, CalloutView, SectionHeaderView } from '../../ui';
 import { useRuntimeStore } from '../../stores/runtimeStore';
 import { RefreshCw, Database } from 'lucide-react';
 
@@ -20,14 +20,7 @@ export const HtmxSection: React.FC = () => {
 
   return (
     <section id="htmx" className="space-y-6 scroll-mt-24">
-      <div className="prose max-w-none">
-        <h2 className="text-3xl font-bold border-b pb-2">HTMX-Style Interactions</h2>
-        <p className="text-base-content/70">
-            Declarative data fetching directly from HTML attributes. In the Builder, you can add 
-            <code>data-url</code>, <code>data-trigger</code>, and <code>data-key</code> props to any element 
-            to wire up API calls without writing code.
-        </p>
-      </div>
+      <SectionHeaderView title={"HTMX-Style Interactions"} subtitle={<p className="text-base-content/70">Declarative data fetching directly from HTML attributes. In the Builder, you can add <code>data-url</code>, <code>data-trigger</code>, and <code>data-key</code> props to any element to wire up API calls without writing code.</p>} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
