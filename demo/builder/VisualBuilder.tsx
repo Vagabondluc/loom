@@ -111,14 +111,10 @@ export const VisualBuilder: React.FC = () => {
     };
   }, [isResizing, handleMouseMove, handleMouseUp]);
 
-  // Preline UI Initialization for Preview Mode
+  // Preline UI Initialization for Preview Mode (centralized service)
   useEffect(() => {
     if (isPreviewMode) {
-      setTimeout(() => {
-        if ((window as any).HSStaticMethods) {
-          (window as any).HSStaticMethods.autoInit();
-        }
-      }, 100);
+      import('../../services/preline').then(({ autoInitPreview }) => autoInitPreview());
     }
   }, [isPreviewMode]);
 

@@ -9,7 +9,7 @@ export * from './atoms/TextArea';
 export * from './atoms/Toggle';
 export * from './molecules/Alert';
 export * from './molecules/Card';
-export * from './molecules/FormField';
+export * from './atoms/FormField';
 export * from './molecules/Modal';
 export * from './molecules/Navbar';
 export * from './molecules/Tabs';

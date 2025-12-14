@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardTitle, Button, Alert, Checkbox } from '../../ui';
+import { Card, CardTitle, Button, Alert, Checkbox, Input, FormField } from '../../ui';
+import { validateWithSchema, generateMockData } from '../../services/form';
 import { SCHEMAS, SchemaId } from '../../utils/schemaRegistry';
 import { ShieldCheck, Sparkles, AlertTriangle } from 'lucide-react';
 import { z } from 'zod';
@@ -12,69 +13,51 @@ export const ZodSection: React.FC = () => {
   const currentSchemaDef = SCHEMAS[selectedSchema];
 
   const handleValidation = () => {
-    const result = currentSchemaDef.schema.safeParse(formData);
+    const result = validateWithSchema(currentSchemaDef.schema, formData);
     if (!result.success) {
-      setErrors(result.error.flatten().fieldErrors);
+      setErrors(result.errors as Record<string, string[]>);
     } else {
       setErrors({});
-      alert("Validation Passed!");
+      alert('Validation Passed!');
     }
   };
 
-  const generateMockData = () => {
-     // Very basic mock generation based on field name logic for demo
-     const mock: Record<string, any> = {};
-     const fields = Object.keys(currentSchemaDef.schema.shape);
-     
-     fields.forEach(field => {
-       if (field.includes('email')) mock[field] = 'demo@example.com';
-       else if (field.includes('password')) mock[field] = 'secret123';
-       else if (field === 'age') mock[field] = 25;
-       else if (field === 'terms' || field === 'accept') mock[field] = true;
-       else mock[field] = 'Sample Text';
-     });
-     setFormData(mock);
-     setErrors({});
+  const handleGenerateMockData = () => {
+    const mock = generateMockData(currentSchemaDef.schema);
+    setFormData(mock);
+    setErrors({});
   };
 
-  const renderField = (key: string, type: any) => {
-     // Simple type inference for demo
+    const renderField = (key: string, type: any) => {
+      // Basic inference for demonstration
      const isBoolean = type instanceof z.ZodBoolean || (type instanceof z.ZodOptional && type._def.innerType instanceof z.ZodBoolean);
      
-     if (isBoolean) {
-       return (
-         <div key={key} className="form-control">
-           <label className="cursor-pointer label justify-start gap-2">
-             <Checkbox 
-               variant="primary"
-               checked={!!formData[key]}
-               onChange={e => setFormData({...formData, [key]: e.target.checked})} 
-             />
-             <span className="label-text capitalize">{key}</span>
-           </label>
-           {errors[key] && <span className="text-error text-xs">{errors[key][0]}</span>}
-         </div>
-       );
-     }
+    if (isBoolean) {
+      return (
+        <FormField key={key} label={key}>
+          <label className="cursor-pointer label justify-start gap-2">
+            <Checkbox
+              variant="primary"
+              checked={!!formData[key]}
+              onChange={(e) => setFormData({ ...formData, [key]: e.target.checked })}
+            />
+            <span className="label-text capitalize">{key}</span>
+          </label>
+          {errors[key] && <span className="text-error text-xs">{errors[key][0]}</span>}
+        </FormField>
+      );
+    }
 
-     return (
-       <div key={key} className="form-control w-full">
-         <label className="label">
-           <span className="label-text capitalize">{key}</span>
-         </label>
-         <input 
-           type={key.includes('password') ? 'password' : 'text'}
-           className={`input input-bordered w-full ${errors[key] ? 'input-error' : ''}`} 
-           value={formData[key] || ''}
-           onChange={e => setFormData({...formData, [key]: e.target.value})}
-         />
-         {errors[key] && (
-           <label className="label">
-             <span className="label-text-alt text-error">{errors[key][0]}</span>
-           </label>
-         )}
-       </div>
-     );
+    return (
+      <FormField key={key} label={key} error={errors[key] ? errors[key][0] : undefined}>
+        <Input
+          type={key.includes('password') ? 'password' : 'text'}
+          className="w-full"
+          value={formData[key] || ''}
+          onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
+        />
+      </FormField>
+    );
   };
 
   return (
@@ -121,7 +104,7 @@ ${Object.keys(currentSchemaDef.schema.shape).map(k => `  ${k}: ...`).join('\n')}
           
           <div className="divider"></div>
           
-          <Button variant="ghost" className="w-full gap-2" onClick={generateMockData}>
+          <Button variant="ghost" className="w-full gap-2" onClick={handleGenerateMockData}>
              <Sparkles className="w-4 h-4" /> Generate Mock Data
           </Button>
         </Card>

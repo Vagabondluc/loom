@@ -13,9 +13,10 @@ interface ModalProps {
   children: React.ReactNode;
   actions?: React.ReactNode;
   className?: string;
+  inert?: boolean;
 }
 
-export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children, actions, className }) => {
+export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children, actions, className, inert }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -40,17 +41,24 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children, ac
     >
       <div className={cn("modal-box", className)}>
         {title && <h3 className="font-bold text-lg mb-4">{title}</h3>}
-        
-        {children}
-        
+        {inert ? (
+          <div className="pointer-events-none opacity-80">{children}</div>
+        ) : (
+          children
+        )}
+
         <div className="modal-action">
-           {actions ? (
-             actions
-           ) : (
-             <form method="dialog">
+          {inert ? (
+            actions ? actions : <button className="btn btn-disabled">Close</button>
+          ) : (
+            actions ? (
+              actions
+            ) : (
+              <form method="dialog">
                 <button className="btn" onClick={onClose}>Close</button>
-             </form>
-           )}
+              </form>
+            )
+          )}
         </div>
       </div>
       <form method="dialog" className="modal-backdrop">
