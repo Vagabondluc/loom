@@ -9,6 +9,7 @@
 
 ## Execution structure
 Keep an active sprint with a named phase and a backlog of epics. Each epic should link to the relevant spec (`spec-*.md`) or PRD (`docs/prd/`). Track progress with checkboxes that describe steps, validations, and pull requests.
+Every epic or task entering the backlog must also cite its TDD partner (`tdd-*.md`) or the specific `REQ-` block it satisfies so traceability mirrors the agent playbook’s RED → GREEN → REFACTOR mandate.
 
 ## GAIS protections
 - No GAIS shims or runtime compatibility hacks.

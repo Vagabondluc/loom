@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { Card, CardTitle, Button, CodeLabel, Badge } from '../../ui';
+import { Card, CardTitle, Button, CodeLabel, Badge, CalloutView } from '../../ui';
 import { useRuntimeStore } from '../../stores/runtimeStore';
 import { RefreshCw, Database } from 'lucide-react';
 
@@ -53,13 +53,13 @@ export const HtmxSection: React.FC = () => {
         <Card bordered>
            <CardTitle>How it works in Builder</CardTitle>
            <div className="space-y-4">
-              <div className="p-4 border border-dashed border-primary/30 rounded-lg bg-base-100">
+              <CalloutView>
                   <div className="flex flex-col gap-2">
                       <Badge variant="primary" size="xs" outline>Data Panel</Badge>
                       <div className="text-sm font-bold">User: {'{{api.user.name}}'}</div>
                       <div className="text-xs opacity-70">Email: {'{{api.user.email}}'}</div>
                   </div>
-              </div>
+              </CalloutView>
               
               <div className="text-sm space-y-2">
                   <p>1. Drag a <strong>Data Panel</strong> from the palette.</p>

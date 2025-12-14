@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Card, CardTitle, Button, Badge, EmptyStateView } from '../ui';
+import { Card, CardTitle, Button, Badge, EmptyStateView, LogicTileView } from '../ui';
 import { useLogicStore } from '../stores/logicStore';
 import { LogicNode } from '../types';
 import { Play, RotateCcw, CheckCircle, Loader2, Info, Settings2 } from 'lucide-react';
@@ -66,10 +66,10 @@ export const LogicLab: React.FC = () => {
                 data-content={node.status === 'success' ? '✓' : (node.status === 'running' ? '●' : '?')}
                 onClick={() => setSelectedNodeId(node.id)}
               >
-                <div className={clsx("flex flex-col items-center gap-2 mt-2 p-2 rounded-lg", selectedNodeId === node.id && "bg-primary/10 ring-2 ring-primary")}>
+                <LogicTileView active={selectedNodeId === node.id}>
                   <span className="font-bold text-sm">{node.label}</span>
                   <StatusBadge status={node.status} />
-                </div>
+                </LogicTileView>
               </li>
             ))}
           </ul>
