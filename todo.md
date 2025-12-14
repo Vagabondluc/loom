@@ -409,7 +409,7 @@ Notes: Continuing sweep for small card patterns and other presentational extract
 ---
 
 ### Safety Reminder: Buildless Development
-- Do not run `npm run build` during the active refactor phase. This repo is currently in GAIS dev mode and should remain buildless until architecture stabilization. See `agent.md` for the canonical rule.
+- Do not run `npm run build` during the active refactor phase. This repo is currently in GAIS dev mode and should remain buildless until architecture stabilization. See `AGENTS.md` for the canonical rule.
 
 ---
 

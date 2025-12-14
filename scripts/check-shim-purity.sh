@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Normalize CRLF -> LF on Windows (in-place); harmless if already LF
+'sed' -i 's/\r$//' "$0" 2>/dev/null || true
+
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -35,4 +38,4 @@ if [ "$failed" -eq 1 ]; then
   exit 1
 fi
 
-echo "Demo runtime shim purity checks passed." 
+echo "Demo runtime shim purity checks passed."

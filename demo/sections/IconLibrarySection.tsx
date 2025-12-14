@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import * as LucideIcons from 'lucide-react';
-import { Card, Button, EmptyStateView } from '../../ui';
+import { Card, Button, EmptyStateView, IconTile } from '../../ui';
 import { useToastStore } from '../../stores/toastStore';
 import { Search, SlidersHorizontal, Tag as TagIcon, X } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -198,23 +198,7 @@ export const IconLibrarySection: React.FC = () => {
             ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
                 {displayedIcons.map(([name, IconComponent]) => (
-                <button
-                    key={name}
-                    className="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-base-200 hover:text-primary transition-all border border-transparent hover:border-base-300 group active:scale-95 relative"
-                    onClick={() => handleCopy(name)}
-                    title={`Copy "${name}"`}
-                    style={{ minHeight: `${size + 40}px` }}
-                >
-                    {/* @ts-ignore */}
-                    <IconComponent 
-                        size={size} 
-                        strokeWidth={strokeWidth} 
-                        className="text-base-content/80 group-hover:text-primary transition-colors duration-200" 
-                    />
-                    <span className="text-[10px] font-mono opacity-60 group-hover:opacity-100 truncate w-full text-center select-all mt-2 absolute bottom-2 px-2">
-                    {name}
-                    </span>
-                </button>
+                  <IconTile key={name} name={name} Icon={IconComponent as any} size={size} strokeWidth={strokeWidth} onClick={() => handleCopy(name)} />
                 ))}
             </div>
             )}

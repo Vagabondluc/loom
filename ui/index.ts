@@ -51,6 +51,7 @@ export * from './molecules/QuickActionButtonView';
 export * from './molecules/ExportTargetItemView';
 export * from './molecules/DraggableBlockView';
 export * from './molecules/ComponentCardView';
+export * from './molecules/IconTile';
 export * from './molecules/ValidationIssueView';
 export * from './molecules/StageErrorView';
 export * from './composites/Panel';

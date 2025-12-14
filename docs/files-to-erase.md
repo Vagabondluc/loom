@@ -16,7 +16,7 @@ This document tracks files that have been redundant or superseded by refactoring
 - **Status:** Safe to delete. The functionality is preserved in `NavigatorTab.tsx`.
 
 ### 3. The entire `/docs/review/` directory
-- **Files:** `agent.json`, `agent.md`, `gais instructions.txt`, `gais_guidelines.md`, `theme editor.md`.
+- **Files:** `agent.json`, `AGENTS.md`, `gais instructions.txt`, `gais_guidelines.md`, `theme editor.md`.
 - **Reason:** Meta-documents used for review/setup.
 - **Superseded by:** Core project docs (`UX_CONTRACT.md`, `MENTAL_MODEL.md`).
 - **Status:** Safe to delete.

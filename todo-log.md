@@ -9,9 +9,9 @@ Entries:
 - 2025-12-13: Added README_GAIS.md to clarify GAIS-only workflow. — tool-assisted
 - 2025-12-13: Added CI workflow to block node artifacts. — tool-assisted
 - 2025-12-13: Git not initialized; could not create branch `refactor/canonical-structure`. — tool-assisted
-- 2025-12-13: Added explicit agent rule to `agent.md` forbidding npm/yarn/pnpm suggestions. — tool-assisted
+- 2025-12-13: Added explicit agent rule to `AGENTS.md` forbidding npm/yarn/pnpm suggestions. — tool-assisted
 - 2025-12-13: Initialized git, created branch `refactor/canonical-structure`, and committed GAIS guard files. — tool-assisted
-- 2025-12-13: Committed additional updates to `todo.md`, `agent.md`, and `todo-log.md` on branch `refactor/canonical-structure`. — tool-assisted
+- 2025-12-13: Committed additional updates to `todo.md`, `AGENTS.md`, and `todo-log.md` on branch `refactor/canonical-structure`. — tool-assisted
 - 2025-12-13: Applied `todo.md` to branch `refactor/canonical-structure` and verified changes are committed. — tool-assisted
 - 2025-12-13: Identified canonical runtime roots: `ui/`, `stores/`, `services/`, `utils/`, `config/`. — tool-assisted
 - 2025-12-13: Moved `projectSlice` implementation to `stores/projectSlice` and replaced demo with shim. — tool-assisted
@@ -35,7 +35,7 @@ Entries:
  - 2025-12-13: Added CI check to verify Node APIs are confined to `docs/tools` only. — tool-assisted
  - 2025-12-13: Added `docs/tools/README.md` documenting Node-only audit tools usage. — tool-assisted
  - 2025-12-13: Updated `docs/AUDIT_ENFORCEMENT.md` with a Node-based tools transitional paragraph and Strategy A canonical model. — tool-assisted
- - 2025-12-13: Tightened `agent.md` Node exception language to limit Node APIs to `docs/tools` for governance/CI only. — tool-assisted
+ - 2025-12-13: Tightened `AGENTS.md` Node exception language to limit Node APIs to `docs/tools` for governance/CI only. — tool-assisted
  - 2025-12-13: Added CI check in `.github/workflows/no-node.yml` to forbid `.node.` files and node APIs outside `docs/tools`. — tool-assisted
  - 2025-12-12: Added scope note and invariants to `todo.md` clarifying that governance and CI belong in `/docs` and CI flows, not as plan tasks; annotated governance sections as [META]. — tool-assisted
  - 2025-12-12: Added `scripts/check-shim-purity.sh` and CI enforcement job to `.github/workflows/ci-enforce.yml` to enforce runtime shim purity; integrated into `scripts/check-contract.sh`. — tool-assisted

@@ -25,7 +25,7 @@ When generating or modifying code, follow this priority:
 3. **In-repo documents**
    Read before any code modification:
 
-   * `docs/agent.md`
+   * `AGENTS.md`
    * `docs/decisions.md`
    * `docs/import.md`
    * `todo.md`
@@ -38,7 +38,7 @@ When generating or modifying code, follow this priority:
 
 # 2. **Project Architecture Compliance**
 
-* Always follow the architecture defined in `docs/agent.md`.
+* Always follow the architecture defined in `AGENTS.md`.
 * Do not invent new directories or coding conventions unless the repo explicitly allows it.
 * All code must run directly in the **browser preview** using **import maps**.
 * No build tools, no bundlers, no Node.js APIs, no `process.env` in browser code.

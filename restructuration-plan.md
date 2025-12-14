@@ -311,7 +311,7 @@ Defines *how* the system is allowed to evolve.
 * These files **must never reference code paths**
 * These files **must never define REQs**
 
-This aligns perfectly with your **agent.md** positioning.
+This aligns perfectly with your **AGENTS.md** positioning.
 
 ---
 
@@ -516,7 +516,7 @@ It will:
 
 * prevent future drift
 * make CI rules trivial
-* keep agent.md clean
+* keep AGENTS.md clean
 * make Loom understandable to *humans and AIs*
 
 ## Restructuration Exit Criteria (Non-Negotiable)
@@ -705,14 +705,14 @@ CI scans **all markdown files** except `/docs/ROADMAP` and `/docs/ARCHIVE`.
 * `MUST`, `SHALL`, `FORBIDDEN`, `NEVER` appear:
 
   * outside a `REQ-*` block
-  * inside `agent.md`
+  * inside `AGENTS.md`
   * inside README files
 * A `REQ-*` block exists outside `/docs/CONTRACTS`
 
 This directly enforces:
 
 * REQs live only in Contracts
-* agent.md cannot be elevated accidentally
+* AGENTS.md cannot be elevated accidentally
 * README remains explanatory only
 
 ---
@@ -760,7 +760,7 @@ This includes:
 
 ## 5️⃣ Agent & Prompt Injection Safety Rules
 
-### agent.md Classification
+### AGENTS.md Classification
 
 ```
 Document Class: Informational / Agent Governance
@@ -769,12 +769,12 @@ May Define REQs: ❌ No
 
 #### CI MUST FAIL if:
 
-* `agent.md` contains:
+* `AGENTS.md` contains:
 
   * `REQ-`
   * Contract-style normative language
   * Claims of authority over `/docs/CONTRACTS`
-* agent.md references:
+* AGENTS.md references:
 
   * ROADMAP specs as truth
   * implementation details as guarantees

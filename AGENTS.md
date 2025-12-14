@@ -35,7 +35,7 @@ When conflicts arise, authority is resolved in this order:
 2.  `INVARIANTS.md`
 3.  Contract-Grade `spec-*.md`
 4.  Corresponding `tdd-*.md`
-5.  This document (`agent.md`)
+5.  This document (`AGENTS.md`)
 
 This document enforces rules; it does not originate them.
 

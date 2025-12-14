@@ -8,6 +8,7 @@ import { useRuntimeStore } from '../stores/runtimeStore';
 import { componentToTemplate } from './builder/palette/utils';
 import { Play, RotateCcw, Bug, Terminal, Activity, XCircle } from 'lucide-react';
 import StageErrorView from '../ui/molecules/StageErrorView';
+import { PanelHeaderView } from '../ui';
 import { clsx } from 'clsx';
 
 interface LogEntry {
@@ -134,9 +135,7 @@ export const RuntimeWorkbench: React.FC = () => {
       {/* 1. Stimulus Panel */}
       <div className="lg:w-80 flex flex-col gap-4">
         <Card className="flex-1 flex flex-col overflow-hidden bg-base-100 shadow-sm" bordered>
-            <div className="p-3 border-b border-base-200 bg-base-100 font-bold flex items-center gap-2 text-sm">
-                <Activity className="w-4 h-4 text-primary" /> Stimulus
-            </div>
+            <PanelHeaderView title={<span className="text-sm font-bold flex items-center gap-2"><Activity className="w-4 h-4 text-primary" /> Stimulus</span>} className="p-3 border-b border-base-200 bg-base-100" />
             <div className="p-4 flex-1 overflow-y-auto space-y-6">
                 
                 <div className="form-control">
@@ -172,14 +171,7 @@ export const RuntimeWorkbench: React.FC = () => {
       {/* 2. Stage (Center) */}
       <div className="flex-1 flex flex-col gap-4 min-w-0">
          <Card className="flex-1 bg-base-100 shadow-sm relative overflow-hidden flex flex-col" bordered>
-            <div className="p-3 border-b border-base-200 bg-base-100 font-bold flex justify-between items-center text-sm">
-                <div className="flex items-center gap-2">
-                    <Play className="w-4 h-4 text-success" /> Stage (Runtime Active)
-                </div>
-                <Button size="xs" variant="ghost" onClick={handleReset}>
-                    <RotateCcw className="w-3 h-3 mr-1" /> Reset
-                </Button>
-            </div>
+            <PanelHeaderView title={<span className="text-sm font-bold flex items-center gap-2"><Play className="w-4 h-4 text-success" /> Stage (Runtime Active)</span>} actions={<Button size="xs" variant="ghost" onClick={handleReset}><RotateCcw className="w-3 h-3 mr-1" /> Reset</Button>} className="p-3 border-b border-base-200 bg-base-100" />
             
             {/* Checkerboard Background */}
             <div className="flex-1 relative bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-opacity-5 flex items-center justify-center bg-base-200/30 overflow-auto">
@@ -193,14 +185,7 @@ export const RuntimeWorkbench: React.FC = () => {
       {/* 3. Logs (Bottom/Right) */}
       <div className="lg:w-80 flex flex-col">
          <Card className="h-full flex flex-col bg-neutral text-neutral-content shadow-sm overflow-hidden" bordered={false}>
-            <div className="p-3 border-b border-neutral-content/10 font-bold flex justify-between items-center text-sm bg-neutral">
-                <div className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4" /> Oscilloscope
-                </div>
-                <button onClick={() => setLogs([])} className="btn btn-xs btn-ghost btn-square text-neutral-content/50 hover:text-white">
-                    <XCircle className="w-4 h-4" />
-                </button>
-            </div>
+            <PanelHeaderView title={<span className="text-sm font-bold flex items-center gap-2"><Terminal className="w-4 h-4" /> Oscilloscope</span>} actions={<button onClick={() => setLogs([])} className="btn btn-xs btn-ghost btn-square text-neutral-content/50 hover:text-white"><XCircle className="w-4 h-4" /></button>} className="p-3 border-b border-neutral-content/10 bg-neutral text-neutral-content" />
             <div className="flex-1 overflow-y-auto p-2 font-mono text-xs space-y-1 bg-neutral/90">
                 {logs.length === 0 && (
                     <div className="opacity-30 text-center mt-10">Waiting for runtime events...</div>

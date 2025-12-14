@@ -104,10 +104,10 @@ for f in $GOV_FILES; do
 done
 
 # 3b) Agent file mustn't contain REQ- or normative terms
-AGENT_FILE="agent.md"
+AGENT_FILE="AGENTS.md"
 if [ -f "$AGENT_FILE" ]; then
   if grep -nE "REQ-" "$AGENT_FILE" >/dev/null; then
-    fail "agent.md must not contain REQ-"
+    fail "AGENTS.md must not contain REQ-"
   fi
 fi
 

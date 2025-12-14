@@ -194,7 +194,7 @@ Task lifecycle and workflow rules.
 
 # 📘 DOCS LAYER — /docs
 
-* `agent.md`
+* `AGENTS.md`
 * `decisions.md`
 * `import.md`
 * `spec-*.md`
